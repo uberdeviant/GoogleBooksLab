@@ -22,4 +22,5 @@ class ModuleAssembler: ModuleAssembling {
         
         return view
     }
+    
 }

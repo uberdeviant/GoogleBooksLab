@@ -74,11 +74,9 @@ extension ShelfViewController: UICollectionViewDataSource {
 
 extension ShelfViewController: ShelfViewable {
     func searchResultsLoaded() {
-        print(presenter?.booksSearchResults?.items)
         DispatchQueue.main.async {
             self.shelfCollectionView.reloadData()
         }
-        
     }
     
     func falure(error: Error) {
