@@ -88,7 +88,7 @@ extension BookCollectionViewCell {
         //Creation
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .label
         label.numberOfLines = 3
         
