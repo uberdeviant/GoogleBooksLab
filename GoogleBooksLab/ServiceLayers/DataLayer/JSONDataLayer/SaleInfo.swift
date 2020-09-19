@@ -11,11 +11,11 @@ import Foundation
 struct SaleInfo: Decodable {
     let country: String
     let saleability: String
-    let onSaleDate: Date
+    let onSaleDate: Date?
     let isEbook: Bool
-    let listPrice: ListPrice
-    let retailPrice: RetailPrice
-    let buyLink: String
+    let listPrice: ListPrice?
+    let retailPrice: RetailPrice?
+    let buyLink: String?
 }
 
 struct ListPrice: Decodable {

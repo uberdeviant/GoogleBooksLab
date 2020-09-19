@@ -18,6 +18,8 @@ protocol ShelfPresentable: class {
     var booksSearchResults: BookSearchResult? {get set}
     
     init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable)
+    
+    func performSearch(by text: String)
 }
 
 class ShelfPresenter: ShelfPresentable {

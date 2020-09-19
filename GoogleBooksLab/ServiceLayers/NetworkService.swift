@@ -14,7 +14,7 @@ protocol NetworkServicing {
 
 class NetworkService: NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text
+        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text.lowercased()
         
         guard let url = URL(string: urlString) else {return}
         

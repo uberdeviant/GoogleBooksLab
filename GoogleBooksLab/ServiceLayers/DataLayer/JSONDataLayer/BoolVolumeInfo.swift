@@ -11,25 +11,25 @@ import Foundation
 struct BookVolumeInfo: Decodable {
     let title: String
     let subtitle: String?
-    let authors: [String]
+    let authors: [String]?
     
-    let publisher: String
-    let publishedDate: String
-    let description: String
+    let publisher: String?
+    let publishedDate: String?
+    let description: String?
     
-    let industryIdentifiers: [IndustryIdentifier]
-    let pageCount: Int
-    let dimensions: [BookDimensions]
+    let industryIdentifiers: [IndustryIdentifier]?
+    let pageCount: Int?
+    //let dimensions: BookDimensions
     
     let printType: String
-    let mainCategory: String
-    let categories: [String]
+    let mainCategory: String?
+    let categories: [String]?
     
-    let averageRating: Double
-    let ratingCount: Int
-    let contentVersion: String
+    let averageRating: Double?
+    let ratingCount: Int?
+    let contentVersion: String?
     
-    let imageLinks: [ImageLinks]
+    let imageLinks: ImageLinks
     let language: String
     let previewLink: String
     let infoLink: String
@@ -50,8 +50,8 @@ struct BookDimensions: Decodable {
 struct ImageLinks: Decodable {
     let smallThumbnail: String
     let thumbnail: String
-    let small: String
-    let medium: String
-    let large: String
-    let extraLarge: String
+    let small: String?
+    let medium: String?
+    let large: String?
+    let extraLarge: String?
 }

@@ -12,7 +12,11 @@ class ShelfViewController: UIViewController {
     
     private let bookCellID = "bookCell"
 
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+        }
+    }
     @IBOutlet weak var shelfCollectionView: UICollectionView! {
         didSet {
             shelfCollectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: bookCellID)
@@ -41,17 +45,25 @@ extension ShelfViewController: UICollectionViewDelegate, UICollectionViewDelegat
     }
 }
 
+// MARK: Search Bar Delegate
+
+extension ShelfViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter?.performSearch(by: searchText)
+    }
+}
+
 // MARK: Collection View DataSource
 
 extension ShelfViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.booksSearchResults?.items.count ?? 0
+        return presenter?.booksSearchResults?.items?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bookCellID, for: indexPath) as? BookCollectionViewCell,
-            let item = presenter?.booksSearchResults?.items[indexPath.row] else {return UICollectionViewCell()}
+            let item = presenter?.booksSearchResults?.items?[indexPath.row] else {return UICollectionViewCell()}
         
         return cell
     }
@@ -63,10 +75,14 @@ extension ShelfViewController: UICollectionViewDataSource {
 extension ShelfViewController: ShelfViewable {
     func searchResultsLoaded() {
         print(presenter?.booksSearchResults?.items)
+        DispatchQueue.main.async {
+            self.shelfCollectionView.reloadData()
+        }
+        
     }
     
     func falure(error: Error) {
-        //
+        print("ERROR", error)
     }
     
 }

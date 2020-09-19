@@ -14,21 +14,21 @@ struct AccessInfo: Decodable {
     let embeddable: Bool
     let publicDomain: Bool
     let textToSpeechPermission: String
-    let epub: [BookFormat]
-    let pdf: [BookFormat]
+    let epub: BookFormat
+    let pdf: BookFormat
     let webReaderLink: String
     let accessViewStatus: String
     
     // MARK: - ToDo downloadAccess
     
-    let searchInfo: SearchInfo
+    let searchInfo: SearchInfo?
     
 }
 
 struct BookFormat: Decodable {
     let isAvailable: Bool
-    let downloadLink: String
-    let acsTokenLink: String
+    let downloadLink: String?
+    let acsTokenLink: String?
 }
 
 struct SearchInfo: Decodable {
