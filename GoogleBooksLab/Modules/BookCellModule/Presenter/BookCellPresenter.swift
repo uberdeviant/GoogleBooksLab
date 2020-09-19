@@ -53,7 +53,7 @@ class BookCellPresenter: BookCellPresentable {
     }
     
     func updateCellBy(item: BookVolume) {
-        guard let link = item.volumeInfo.imageLinks?.smallThumbnail,
+        guard let link = item.volumeInfo.imageLinks?.thumbnail,
             let imageURL = URL(string: link) else {
             view?.updateCellBy(image: nil, title: item.volumeInfo.title)
             return

@@ -35,6 +35,7 @@
                 </collectionView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="mi4-JM-YIQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7Np-P6-EBg"/>
                 <constraint firstItem="FiA-dj-qaq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="GdQ-zW-hWb"/>

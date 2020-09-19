@@ -32,6 +32,25 @@ class ShelfViewController: UIViewController {
     
     var presenter: ShelfPresentable?
     
+    // MARK: - Overriden Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addTapGestureRecognizer()
+    }
+    
+    // MARK: - Custom Methods
+    
+    private func addTapGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
 }
 
 // MARK: Collection View Delegate
