@@ -1,39 +1,18 @@
 //
-//  ShelfViewController.swift
+//  ShelfCollectionViewController.swift
 //  GoogleBooksLab
 //
-//  Created by Ramil Salimov on 19.09.2020.
+//  Created by Ramil Salimov on 20.09.2020.
 //  Copyright © 2020 Ramil Salimov. All rights reserved.
 //
 
 import UIKit
 
-class ShelfViewController: UIViewController {
-    
-    // MARK: - Outlets
+class ShelfCollectionViewController: UICollectionViewController {
 
-    @IBOutlet weak var searchBar: UISearchBar! {
-        didSet {
-            searchBar.delegate = self
-            searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        }
-    }
+    // MARK: - UI Properties
     
-    @IBOutlet weak var shelfCollectionView: UICollectionView! {
-        didSet {
-            shelfCollectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: bookCellID)
-            shelfCollectionView.delegate = self
-            shelfCollectionView.dataSource = self
-        }
-    }
-    
-    // MARK: - Overriden Methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Google Books"
-        presenter?.performSearch(by: "Swift") //First search while app doesn't have DB with favourits
-    }
+    var searchController: UISearchController!
     
     // MARK: - Properties
     
@@ -41,11 +20,19 @@ class ShelfViewController: UIViewController {
     
     var presenter: ShelfPresentable?
     
+    // MARK: - Overriden Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateUI()
+        createSearchBar()
+    }
+    
 }
 
 // MARK: Search Bar Delegate
 
-extension ShelfViewController: UISearchBarDelegate {
+extension ShelfCollectionViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
@@ -54,9 +41,9 @@ extension ShelfViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: Collection View Delegate
+// MARK: Collection View
 
-extension ShelfViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ShelfCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 240)
     }
@@ -73,19 +60,19 @@ extension ShelfViewController: UICollectionViewDelegate, UICollectionViewDelegat
         return UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 15)
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchController.searchBar.endEditing(true)
     }
 }
 
 // MARK: Collection View DataSource
 
-extension ShelfViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ShelfCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.booksSearchResults?.items?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = presenter?.dequeueCell(collectionView: collectionView, indexPath: indexPath, cellId: bookCellID) {
             return cell
@@ -94,14 +81,15 @@ extension ShelfViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? BookCollectionViewCell else {return}
         animateSelectionAndPerformSegue(of: cell)
     }
     
+    // Animation
     private func animateSelectionAndPerformSegue(of cell: BookCollectionViewCell) {
         UIView.animate(withDuration: 0.2, animations: {
-            cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            cell.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
             cell.alpha = 0.8
         }) { (_) in
             UIView.animate(withDuration: 0.2, animations: {
@@ -116,11 +104,12 @@ extension ShelfViewController: UICollectionViewDataSource {
 
 // MARK: Presenter dependency
 
-extension ShelfViewController: ShelfViewable {
+extension ShelfCollectionViewController: ShelfViewable {
     func searchResultsLoaded() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            self.shelfCollectionView.reloadData()
+            self.collectionView.reloadData()
+            self.collectionView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 100, height: 10), animated: true)
         }
     }
     
@@ -128,4 +117,29 @@ extension ShelfViewController: ShelfViewable {
         print("ERROR", error)
     }
     
+}
+
+// MARK: - Building
+
+extension ShelfCollectionViewController {
+    private func updateUI() {
+        self.title = "Google Books"
+        self.collectionView.backgroundColor = .systemBackground
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: bookCellID)
+        presenter?.performSearch(by: "Book") //First search while app doesn't have DB with favourits
+        
+    }
+    
+    private func createSearchBar() {
+        self.searchController = UISearchController()
+
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.becomeFirstResponder()
+        
+        self.navigationItem.titleView = searchController.searchBar
+        searchController.searchBar.delegate = self
+    }
 }

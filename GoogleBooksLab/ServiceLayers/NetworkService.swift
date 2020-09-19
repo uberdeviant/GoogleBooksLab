@@ -15,7 +15,7 @@ protocol NetworkServicing {
 
 class NetworkService: NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text.lowercased()
+        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text.lowercased() + "&startIndex=0&maxResults=25" // MAX result is 25, this thing should be in the App settings
         
         guard let url = URL(string: urlString) else {return}
         

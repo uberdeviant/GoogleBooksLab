@@ -68,7 +68,7 @@ extension BookDetailViewController: BookDetailViewable {
         bookTitleLabel.text = item.volumeInfo.title
         bookAuthorLabel.text = item.volumeInfo.authors?.joined(separator: "\n") ?? "Unknown"
         
-        categoryLabel.text = item.volumeInfo.mainCategory ?? "Unknown"
+        categoryLabel.text = item.volumeInfo.categories?.first ?? "Unknown"
         publisherLabel.text = item.volumeInfo.publisher ?? "Unknown"
         if let pageCount = item.volumeInfo.pageCount {
             pagesLabel.text = "\(pageCount)"
@@ -78,9 +78,11 @@ extension BookDetailViewController: BookDetailViewable {
         if let rating = item.volumeInfo.averageRating?.starredRaiting() {
             ratingLabel.text = rating
             ratingLabel.textColor = .systemBlue
+            ratingLabel.font = UIFont.systemFont(ofSize: 24)
         } else {
             ratingLabel.text = "No Rating"
             ratingLabel.textColor = .label
+            ratingLabel.font = UIFont.systemFont(ofSize: 17)
         }
     }
 }
