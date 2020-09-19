@@ -22,6 +22,11 @@
 		D2CE30AB25160560003FD77A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D2CE30AA25160560003FD77A /* .swiftlint.yml */; };
 		D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30AE25160C98003FD77A /* BookCollectionViewCell.swift */; };
 		D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30B22516185D003FD77A /* UIViewExtension.swift */; };
+		D2CE30B62516219E003FD77A /* BookVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30B52516219E003FD77A /* BookVolume.swift */; };
+		D2CE30B82516280C003FD77A /* BoolVolumeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30B72516280C003FD77A /* BoolVolumeInfo.swift */; };
+		D2CE30BA25162915003FD77A /* SaleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30B925162915003FD77A /* SaleInfo.swift */; };
+		D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30BB25162960003FD77A /* AccessInfo.swift */; };
+		D2CE30BE25163168003FD77A /* BookSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30BD25163168003FD77A /* BookSearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +59,11 @@
 		D2CE30AA25160560003FD77A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D2CE30AE25160C98003FD77A /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2CE30B22516185D003FD77A /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		D2CE30B52516219E003FD77A /* BookVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookVolume.swift; sourceTree = "<group>"; };
+		D2CE30B72516280C003FD77A /* BoolVolumeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolVolumeInfo.swift; sourceTree = "<group>"; };
+		D2CE30B925162915003FD77A /* SaleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleInfo.swift; sourceTree = "<group>"; };
+		D2CE30BB25162960003FD77A /* AccessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessInfo.swift; sourceTree = "<group>"; };
+		D2CE30BD25163168003FD77A /* BookSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +200,7 @@
 		D2CE30A425160378003FD77A /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2CE30B42516217E003FD77A /* JSONDataLayer */,
 				D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */,
 			);
 			path = DataLayer;
@@ -217,6 +228,18 @@
 				D2CE30B22516185D003FD77A /* UIViewExtension.swift */,
 			);
 			path = "UI Helpers";
+			sourceTree = "<group>";
+		};
+		D2CE30B42516217E003FD77A /* JSONDataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D2CE30BD25163168003FD77A /* BookSearchResult.swift */,
+				D2CE30B52516219E003FD77A /* BookVolume.swift */,
+				D2CE30B72516280C003FD77A /* BoolVolumeInfo.swift */,
+				D2CE30B925162915003FD77A /* SaleInfo.swift */,
+				D2CE30BB25162960003FD77A /* AccessInfo.swift */,
+			);
+			path = JSONDataLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,15 +365,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2CE30BA25162915003FD77A /* SaleInfo.swift in Sources */,
 				D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */,
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
+				D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */,
 				D2CE30982515F6E8003FD77A /* ShelfViewController.swift in Sources */,
+				D2CE30B82516280C003FD77A /* BoolVolumeInfo.swift in Sources */,
 				D2CE309D2515F8DD003FD77A /* Router.swift in Sources */,
+				D2CE30B62516219E003FD77A /* BookVolume.swift in Sources */,
 				D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */,
 				D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */,
 				D2CE309F2515FA40003FD77A /* ModuleAssembler.swift in Sources */,
 				D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */,
 				D2CE306C2515F634003FD77A /* AppDelegate.swift in Sources */,
+				D2CE30BE25163168003FD77A /* BookSearchResult.swift in Sources */,
 				D2CE306E2515F634003FD77A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

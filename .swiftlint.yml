@@ -1,5 +1,6 @@
 disabled_rules:
  - trailing_whitespace
+ - identifier_name #for JSON
 type_name:
  allowed_symbols: ["_"]
 line_length:

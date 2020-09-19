@@ -9,11 +9,28 @@
 import Foundation
 
 protocol NetworkServicing {
-    func getComments(completion: @escaping (Result<[String]?, Error>) -> Void)
+    func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void)
 }
 
 class NetworkService: NetworkServicing {
-    func getComments(completion: @escaping (Result<[String]?, Error>) -> Void) {
-        //
+    func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
+        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text
+        
+        guard let url = URL(string: urlString) else {return}
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            do {
+                guard let data = data else { print("nil search data"); return }
+                let searchResults = try JSONDecoder().decode(BookSearchResult.self, from: data)
+                completion(.success(searchResults))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 }

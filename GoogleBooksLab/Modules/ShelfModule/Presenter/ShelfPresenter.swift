@@ -9,11 +9,14 @@
 import Foundation
 
 protocol ShelfViewable: class {
-    func defaultBooksLoaded()
+    func searchResultsLoaded()
     func falure(error: Error)
 }
 
 protocol ShelfPresentable: class {
+    
+    var booksSearchResults: BookSearchResult? {get set}
+    
     init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable)
 }
 
@@ -23,9 +26,26 @@ class ShelfPresenter: ShelfPresentable {
     var router: Routerable?
     let networkService: NetworkServicing!
     
+    var booksSearchResults: BookSearchResult? {
+        didSet {
+            view?.searchResultsLoaded()
+        }
+    }
+    
     required init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable) {
         self.view = view
         self.networkService = networkService
         self.router = router
+    }
+    
+    func performSearch(by text: String) {
+        networkService.searchBooks(by: text) { [unowned self](result) in
+            switch result {
+            case .success(let success):
+                self.booksSearchResults = success
+            case .failure(let error):
+                self.view?.falure(error: error)
+            }
+        }
     }
 }

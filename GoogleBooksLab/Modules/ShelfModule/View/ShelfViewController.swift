@@ -45,11 +45,14 @@ extension ShelfViewController: UICollectionViewDelegate, UICollectionViewDelegat
 
 extension ShelfViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return presenter?.booksSearchResults?.items.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bookCellID, for: indexPath) as? BookCollectionViewCell else {return UICollectionViewCell()}
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bookCellID, for: indexPath) as? BookCollectionViewCell,
+            let item = presenter?.booksSearchResults?.items[indexPath.row] else {return UICollectionViewCell()}
+        
         return cell
     }
     
@@ -58,8 +61,8 @@ extension ShelfViewController: UICollectionViewDataSource {
 // MARK: Presenter dependency
 
 extension ShelfViewController: ShelfViewable {
-    func defaultBooksLoaded() {
-        //
+    func searchResultsLoaded() {
+        print(presenter?.booksSearchResults?.items)
     }
     
     func falure(error: Error) {
