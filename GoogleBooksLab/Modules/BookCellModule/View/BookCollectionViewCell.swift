@@ -13,13 +13,35 @@ class BookCollectionViewCell: UICollectionViewCell {
     weak var bookThumbnailImageView: UIImageView!
     weak var titleBookLabel: UILabel!
     
+    var presenter: BookCellPresentable?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         createUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        bookThumbnailImageView.image = nil
+        titleBookLabel.text = nil
+        presenter?.prepareForReuse()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Presenter Dependency
+
+extension BookCollectionViewCell: BookCellViewable {
+    func updateCellBy(image: UIImage?, title: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.titleBookLabel.text = title
+            self.bookThumbnailImageView.image = image
+        }
     }
 }
 

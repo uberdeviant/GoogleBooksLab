@@ -10,13 +10,14 @@ import UIKit
 
 class ShelfViewController: UIViewController {
     
-    private let bookCellID = "bookCell"
+    // MARK: - Outlets
 
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
             searchBar.delegate = self
         }
     }
+    
     @IBOutlet weak var shelfCollectionView: UICollectionView! {
         didSet {
             shelfCollectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: bookCellID)
@@ -24,6 +25,10 @@ class ShelfViewController: UIViewController {
             shelfCollectionView.dataSource = self
         }
     }
+    
+    // MARK: - Properties
+    
+    private let bookCellID = "bookCell"
     
     var presenter: ShelfPresentable?
     
@@ -62,10 +67,11 @@ extension ShelfViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bookCellID, for: indexPath) as? BookCollectionViewCell,
-            let item = presenter?.booksSearchResults?.items?[indexPath.row] else {return UICollectionViewCell()}
-        
-        return cell
+        if let cell = presenter?.dequeueCell(collectionView: collectionView, indexPath: indexPath, cellId: bookCellID) as? UICollectionViewCell {
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
     }
     
 }
@@ -74,7 +80,8 @@ extension ShelfViewController: UICollectionViewDataSource {
 
 extension ShelfViewController: ShelfViewable {
     func searchResultsLoaded() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
             self.shelfCollectionView.reloadData()
         }
     }

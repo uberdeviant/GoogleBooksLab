@@ -14,7 +14,7 @@ protocol ModuleAssembling {
 
 class ModuleAssembler: ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController {
-        let networkService = NetworkService() //Create network Service
+        let networkService = NetworkService() // Create network Service
         let view = ShelfViewController() // Creste View
         let presenter = ShelfPresenter(view: view, networkService: networkService, router: router) // Create Presenter with injected View
         

@@ -19,6 +19,7 @@ protocol RouterContainable {
 
 protocol Routerable: RouterContainable {
     func instantiateShelfViewController()
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> AnyObject
 }
 
 class Router: Routerable {
@@ -36,6 +37,18 @@ class Router: Routerable {
         let shelfViewController = moduleAssembler?.createShelfModule(router: self) else {return}
         
         navigationController.viewControllers = [shelfViewController]
+        
+    }
+    
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> AnyObject {
+        //We need to use AnyObject because we don't want to import UIKit to presenter
+        guard let collectionView = collectionView as? UICollectionView else {return UICollectionViewCell()}
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? BookCollectionViewCell else {return UICollectionViewCell()}
+        let presenter = BookCellPresenter(view: cell, networkLayer: NetworkService(), imageCache: imageCache, router: self, bookItem: item)
+        cell.presenter = presenter
+        
+        return cell
         
     }
     

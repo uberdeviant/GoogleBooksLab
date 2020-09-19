@@ -10,6 +10,7 @@ import Foundation
 
 protocol NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void)
+    func loadThumbnail(of url: URL, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask
 }
 
 class NetworkService: NetworkServicing {
@@ -32,5 +33,18 @@ class NetworkService: NetworkServicing {
                 completion(.failure(error))
             }
         }.resume()
+    }
+    
+    func loadThumbnail(of url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
+        
+        return URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            if let data = data {
+                completion(.success(data))
+            }
+        }
     }
 }

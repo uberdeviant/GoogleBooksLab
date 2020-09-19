@@ -1,6 +1,7 @@
 disabled_rules:
  - trailing_whitespace
  - identifier_name #for JSON
+ - empty_enum_arguments #for error data tasks
 type_name:
  allowed_symbols: ["_"]
 line_length:

@@ -19,7 +19,6 @@ struct BookVolumeInfo: Decodable {
     
     let industryIdentifiers: [IndustryIdentifier]?
     let pageCount: Int?
-    //let dimensions: BookDimensions
     
     let printType: String
     let mainCategory: String?
@@ -39,12 +38,6 @@ struct BookVolumeInfo: Decodable {
 struct IndustryIdentifier: Decodable {
     let type: String
     let identifier: String
-}
-
-struct BookDimensions: Decodable {
-    let height: String
-    let width: String
-    let thickness: String
 }
 
 struct ImageLinks: Decodable {
