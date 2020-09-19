@@ -49,12 +49,12 @@ class BookCellPresenter: BookCellPresentable {
     }
     
     func prepareForReuse() {
-        task?.cancel() // Task should be cancelled when reusing
-        task = nil
+        task?.cancel()// Task should be cancelled when reusing
     }
     
     func updateCellBy(item: BookVolume) {
-        guard let imageURL = URL(string: item.volumeInfo.imageLinks.smallThumbnail) else {
+        guard let link = item.volumeInfo.imageLinks?.smallThumbnail,
+            let imageURL = URL(string: link) else {
             view?.updateCellBy(image: nil, title: item.volumeInfo.title)
             return
         }

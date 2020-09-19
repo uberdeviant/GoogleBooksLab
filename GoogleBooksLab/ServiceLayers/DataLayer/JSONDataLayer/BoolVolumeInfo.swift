@@ -28,7 +28,7 @@ struct BookVolumeInfo: Decodable {
     let ratingCount: Int?
     let contentVersion: String?
     
-    let imageLinks: ImageLinks
+    let imageLinks: ImageLinks?
     let language: String
     let previewLink: String
     let infoLink: String
