@@ -29,10 +29,10 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JcQ-fI-0eM">
-                            <rect key="frame" x="123.5" y="15" width="167" height="251"/>
+                            <rect key="frame" x="111.5" y="5" width="191" height="286.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sqb-2O-XZ9">
-                                    <rect key="frame" x="0.0" y="0.0" width="167" height="251"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="191" height="286.5"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -45,19 +45,19 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5o-Qd-XK7">
-                            <rect key="frame" x="15" y="291" width="384" height="41"/>
+                            <rect key="frame" x="15" y="316.5" width="384" height="41"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuG-AA-Aap">
-                            <rect key="frame" x="15" y="357" width="384" height="26.5"/>
+                            <rect key="frame" x="15" y="382.5" width="384" height="26.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9Ge-40-03d">
-                            <rect key="frame" x="30" y="428.5" width="354" height="127"/>
+                            <rect key="frame" x="30" y="454" width="354" height="127"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Euk-qU-fuZ">
                                     <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -136,7 +136,7 @@
                         <constraint firstAttribute="trailing" secondItem="IuG-AA-Aap" secondAttribute="trailing" constant="15" id="Ujb-pV-F2K"/>
                         <constraint firstAttribute="trailing" secondItem="e5o-Qd-XK7" secondAttribute="trailing" constant="15" id="VVf-Y0-yYS"/>
                         <constraint firstAttribute="bottom" secondItem="9Ge-40-03d" secondAttribute="bottom" constant="15" id="XeP-09-b4I"/>
-                        <constraint firstItem="JcQ-fI-0eM" firstAttribute="top" secondItem="8GG-Nz-gpY" secondAttribute="top" constant="15" id="YW9-kU-Ilj"/>
+                        <constraint firstItem="JcQ-fI-0eM" firstAttribute="top" secondItem="8GG-Nz-gpY" secondAttribute="top" constant="5" id="YW9-kU-Ilj"/>
                         <constraint firstItem="9Ge-40-03d" firstAttribute="top" secondItem="IuG-AA-Aap" secondAttribute="bottom" constant="45" id="lvq-lT-IHD"/>
                         <constraint firstItem="IuG-AA-Aap" firstAttribute="top" secondItem="e5o-Qd-XK7" secondAttribute="bottom" constant="25" id="ni1-qY-oPa"/>
                         <constraint firstItem="9Ge-40-03d" firstAttribute="leading" secondItem="8GG-Nz-gpY" secondAttribute="leading" constant="30" id="v6Q-JT-y6T"/>
@@ -148,7 +148,7 @@
                 <constraint firstItem="JcQ-fI-0eM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2gA-vq-49f"/>
                 <constraint firstItem="8GG-Nz-gpY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DFK-lp-3xQ"/>
                 <constraint firstItem="8GG-Nz-gpY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Kp8-ts-KBj"/>
-                <constraint firstItem="JcQ-fI-0eM" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.28" id="RKF-cw-xfS"/>
+                <constraint firstItem="JcQ-fI-0eM" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.32" id="RKF-cw-xfS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8GG-Nz-gpY" secondAttribute="trailing" id="gAF-va-cE3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8GG-Nz-gpY" secondAttribute="bottom" id="kGM-gt-ZRg"/>
             </constraints>
