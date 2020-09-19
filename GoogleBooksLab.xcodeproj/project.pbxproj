@@ -20,6 +20,8 @@
 		D2CE309F2515FA40003FD77A /* ModuleAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE309E2515FA40003FD77A /* ModuleAssembler.swift */; };
 		D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30A02515FB40003FD77A /* NetworkService.swift */; };
 		D2CE30AB25160560003FD77A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D2CE30AA25160560003FD77A /* .swiftlint.yml */; };
+		D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30AE25160C98003FD77A /* BookCollectionViewCell.swift */; };
+		D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30B22516185D003FD77A /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		D2CE309E2515FA40003FD77A /* ModuleAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembler.swift; sourceTree = "<group>"; };
 		D2CE30A02515FB40003FD77A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		D2CE30AA25160560003FD77A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D2CE30AE25160C98003FD77A /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2CE30B22516185D003FD77A /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 		D2CE306A2515F634003FD77A /* GoogleBooksLab */ = {
 			isa = PBXGroup;
 			children = (
+				D2CE30B02516181F003FD77A /* UI Helpers */,
 				D2CE30942515F6A4003FD77A /* Router */,
 				D2CE30952515F6B0003FD77A /* ServiceLayers */,
 				D2CE30902515F65E003FD77A /* Modules */,
@@ -115,6 +120,7 @@
 		D2CE30902515F65E003FD77A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D2CE30AC25160C50003FD77A /* BookCellModule */,
 				D2CE30912515F67E003FD77A /* ShelfModule */,
 			);
 			path = Modules;
@@ -187,6 +193,30 @@
 				D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */,
 			);
 			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		D2CE30AC25160C50003FD77A /* BookCellModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2CE30AD25160C6B003FD77A /* View */,
+			);
+			path = BookCellModule;
+			sourceTree = "<group>";
+		};
+		D2CE30AD25160C6B003FD77A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2CE30AE25160C98003FD77A /* BookCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2CE30B02516181F003FD77A /* UI Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2CE30B22516185D003FD77A /* UIViewExtension.swift */,
+			);
+			path = "UI Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,9 +342,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */,
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
 				D2CE30982515F6E8003FD77A /* ShelfViewController.swift in Sources */,
 				D2CE309D2515F8DD003FD77A /* Router.swift in Sources */,
+				D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */,
 				D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */,
 				D2CE309F2515FA40003FD77A /* ModuleAssembler.swift in Sources */,
 				D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */,
