@@ -25,7 +25,9 @@ protocol ShelfPresentable: class {
     
     // MARK: - Navigation
     
-    func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> AnyObject?
+    func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> BookCollectionViewCell?
+    
+    func goToDetail(bookId: String?)
 }
 
 class ShelfPresenter: ShelfPresentable {
@@ -58,8 +60,16 @@ class ShelfPresenter: ShelfPresentable {
         }
     }
     
-    func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> AnyObject? {
+    func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> BookCollectionViewCell? {
         guard let searchItem = booksSearchResults?.items?[indexPath.row] else {return nil}
         return router?.dequeReusableBookCell(for: collectionView, indexPath: indexPath, cellId: cellId, item: searchItem, imageCache: imageCacheForCells)
+    }
+    
+    func goToDetail(bookId: String?) {
+        guard let items = booksSearchResults?.items, let bookId = bookId else {return}
+        for book in items where book.id == bookId {
+            router?.instantiateDetailViewController(by: book)
+            break // O(log n) ?
+        }
     }
 }

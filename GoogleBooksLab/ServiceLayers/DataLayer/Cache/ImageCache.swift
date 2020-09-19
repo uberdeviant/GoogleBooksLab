@@ -6,14 +6,14 @@
 //  Copyright © 2020 Ramil Salimov. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIImage
 
 extension UIImage {
     func decodedImage() -> UIImage {
         guard let cgImage = cgImage else { return self }
         let size = CGSize(width: cgImage.width, height: cgImage.height)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        // Optimal for Google Books Thumbnails 512 B/R for 8 B/C
+        // Optimal for Google Books Thumbnails 512 Bytes/R for 8 Bits/C
         let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 512, space: colorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
         context?.draw(cgImage, in: CGRect(origin: .zero, size: size))
         guard let decodedImage = context?.makeImage() else { return self }

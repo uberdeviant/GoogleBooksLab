@@ -19,7 +19,6 @@ protocol BookCellPresentable {
     
     init(view: BookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCache, router: Routerable, bookItem: BookVolume)
     
-    func bookCellTapped()
     func updateCellBy(item: BookVolume)
     func prepareForReuse()
 }
@@ -44,16 +43,12 @@ class BookCellPresenter: BookCellPresentable {
         updateCellBy(item: bookItem)
     }
     
-    func bookCellTapped() {
-        //
-    }
-    
     func prepareForReuse() {
         task?.cancel()// Task should be cancelled when reusing
     }
     
     func updateCellBy(item: BookVolume) {
-        guard let link = item.volumeInfo.imageLinks?.thumbnail,
+        guard let link = item.volumeInfo.imageLinks?.smallThumbnail,
             let imageURL = URL(string: link) else {
             view?.updateCellBy(image: nil, title: item.volumeInfo.title)
             return

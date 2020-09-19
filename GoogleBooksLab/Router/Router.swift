@@ -19,7 +19,9 @@ protocol RouterContainable {
 
 protocol Routerable: RouterContainable {
     func instantiateShelfViewController()
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> AnyObject
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> BookCollectionViewCell?
+    func instantiateDetailViewController(by item: BookVolume)
+    func popToRoot()
 }
 
 class Router: Routerable {
@@ -40,11 +42,11 @@ class Router: Routerable {
         
     }
     
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> AnyObject {
-        //We need to use AnyObject because we don't want to import UIKit to presenter
-        guard let collectionView = collectionView as? UICollectionView else {return UICollectionViewCell()}
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCache) -> BookCollectionViewCell? {
+        //We need to use AnyObject because we don't want to import UIKit for presenter
+        guard let collectionView = collectionView as? UICollectionView else {return nil}
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? BookCollectionViewCell else {return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? BookCollectionViewCell else {return nil}
         let presenter = BookCellPresenter(view: cell, networkLayer: NetworkService(), imageCache: imageCache, router: self, bookItem: item)
         cell.presenter = presenter
         
@@ -52,4 +54,14 @@ class Router: Routerable {
         
     }
     
+    func instantiateDetailViewController(by item: BookVolume) {
+        guard let navigationController = navigationController,
+        let detailViewController = moduleAssembler?.createDetailModule(item: item, router: self) else {return}
+        
+        navigationController.pushViewController(detailViewController, animated: true)
+    }
+    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }

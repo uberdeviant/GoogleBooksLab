@@ -14,7 +14,7 @@ class BookCollectionViewCell: UICollectionViewCell {
     weak var titleBookLabel: UILabel!
     
     var presenter: BookCellPresentable?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         createUI()
@@ -36,6 +36,7 @@ class BookCollectionViewCell: UICollectionViewCell {
 // MARK: - Presenter Dependency
 
 extension BookCollectionViewCell: BookCellViewable {
+    
     func updateCellBy(image: UIImage?, title: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
@@ -45,7 +46,7 @@ extension BookCollectionViewCell: BookCellViewable {
     }
 }
 
-// MARK: - Building
+// MARK: - Building and animation
 
 extension BookCollectionViewCell {
     
@@ -89,7 +90,7 @@ extension BookCollectionViewCell {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .label
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         
         titleBookLabel = label
         self.contentView.addSubview(titleBookLabel)
