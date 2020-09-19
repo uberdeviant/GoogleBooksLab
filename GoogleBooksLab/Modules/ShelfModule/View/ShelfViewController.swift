@@ -53,8 +53,11 @@ extension ShelfViewController: UICollectionViewDelegate, UICollectionViewDelegat
 // MARK: Search Bar Delegate
 
 extension ShelfViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter?.performSearch(by: searchText)
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            presenter?.performSearch(by: text)
+        }
     }
 }
 
