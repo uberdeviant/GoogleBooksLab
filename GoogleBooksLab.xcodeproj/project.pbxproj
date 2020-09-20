@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2366CCF25176B3100F4E6D6 /* MockModuleAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366CCE25176B3100F4E6D6 /* MockModuleAssembler.swift */; };
+		D2366CD6251770BF00F4E6D6 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366CD5251770BF00F4E6D6 /* RouterTests.swift */; };
 		D264BC3625166093005EA18F /* BookCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC3525166093005EA18F /* BookCellPresenter.swift */; };
 		D264BC3A251662E8005EA18F /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC39251662E8005EA18F /* ImageCache.swift */; };
 		D264BC4325168B1D005EA18F /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4125168B1D005EA18F /* BookDetailViewController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2366CCE25176B3100F4E6D6 /* MockModuleAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModuleAssembler.swift; sourceTree = "<group>"; };
+		D2366CD5251770BF00F4E6D6 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		D264BC3525166093005EA18F /* BookCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCellPresenter.swift; sourceTree = "<group>"; };
 		D264BC39251662E8005EA18F /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		D264BC4125168B1D005EA18F /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2366CD025176CE500F4E6D6 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D2366CD5251770BF00F4E6D6 /* RouterTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		D264BC3425166079005EA18F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,9 +196,11 @@
 		D2CE30842515F638003FD77A /* GoogleBooksLabTests */ = {
 			isa = PBXGroup;
 			children = (
-				D2CE30872515F638003FD77A /* Info.plist */,
 				D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */,
 				D29B68AA2517642700E6E4E2 /* MockImageCache.swift */,
+				D2366CCE25176B3100F4E6D6 /* MockModuleAssembler.swift */,
+				D2366CD025176CE500F4E6D6 /* Tests */,
+				D2CE30872515F638003FD77A /* Info.plist */,
 			);
 			path = GoogleBooksLabTests;
 			sourceTree = "<group>";
@@ -458,7 +472,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2366CD6251770BF00F4E6D6 /* RouterTests.swift in Sources */,
 				D29B68AB2517642700E6E4E2 /* MockImageCache.swift in Sources */,
+				D2366CCF25176B3100F4E6D6 /* MockModuleAssembler.swift in Sources */,
 				D29B68A925175D4400E6E4E2 /* MockNetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,9 +18,10 @@ protocol RouterContainable {
 }
 
 protocol Routerable: RouterContainable {
+    
     func instantiateShelfViewController()
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCachable) -> BookCollectionViewCell?
-    func instantiateDetailViewController(by item: BookVolume)
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell?
+    func instantiateDetailViewController(by item: BookVolume?)
     func popToRoot()
 }
 
@@ -42,9 +43,9 @@ class Router: Routerable {
         
     }
     
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume, imageCache: ImageCachable) -> BookCollectionViewCell? {
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell? {
         //We need to use AnyObject because we don't want to import UIKit for presenter
-        guard let collectionView = collectionView as? UICollectionView else {return nil}
+        guard let collectionView = collectionView as? UICollectionView, let item = item else {return nil}
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? BookCollectionViewCell else {return nil}
         let networkService = NetworkService()
@@ -55,7 +56,7 @@ class Router: Routerable {
         
     }
     
-    func instantiateDetailViewController(by item: BookVolume) {
+    func instantiateDetailViewController(by item: BookVolume?) {
         guard let navigationController = navigationController,
         let detailViewController = moduleAssembler?.createDetailModule(item: item, router: self) else {return}
         

@@ -11,19 +11,17 @@ import XCTest
 
 class MockNetworkService: NetworkServicing {
     
-    var successSearch: Bool
     var successThumbnail: Bool
     
-    init(successSearch: Bool = true, successThumbnail: Bool = true) {
-        self.successSearch = successSearch
+    init(successThumbnail: Bool = true) {
         self.successThumbnail = successThumbnail
     }
     
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
-        if successSearch {
-            completion(.success(returnMockSearchBook()))
-        } else {
+        if text == "error" {
             completion(.failure(NSError(domain: "foo", code: 0, userInfo: nil)))
+        } else {
+            completion(.success(returnMockSearchBook()))
         }
     }
     

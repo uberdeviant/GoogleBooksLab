@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController
-    func createDetailModule(item: BookVolume, router: Routerable) -> UIViewController
+    func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController
 }
 
 class ModuleAssembler: ModuleAssembling {
@@ -28,7 +28,7 @@ class ModuleAssembler: ModuleAssembling {
         return view
     }
     
-    func createDetailModule(item: BookVolume, router: Routerable) -> UIViewController {
+    func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController {
         let networkService = NetworkService() // Create network Service
         let view = BookDetailViewController() // Creste View
         let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router) // Create Presenter with injected View
