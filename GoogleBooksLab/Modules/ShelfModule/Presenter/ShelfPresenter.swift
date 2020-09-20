@@ -17,7 +17,7 @@ protocol ShelfPresentable: class {
     
     var booksSearchResults: BookSearchResult? {get set}
     
-    init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable)
+    init(view: ShelfViewable, imageCache: ImageCachable, networkService: NetworkServicing, router: Routerable)
     
     // MARK: - Network
     
@@ -39,7 +39,7 @@ class ShelfPresenter: ShelfPresentable {
     weak var view: ShelfViewable?
     var router: Routerable?
     let networkService: NetworkServicing!
-    let imageCacheForCells = ImageCache()
+    let imageCacheForCells: ImageCachable!
     
     var booksSearchResults: BookSearchResult? {
         didSet {
@@ -47,9 +47,10 @@ class ShelfPresenter: ShelfPresentable {
         }
     }
     
-    required init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable) {
+    required init(view: ShelfViewable, imageCache: ImageCachable, networkService: NetworkServicing, router: Routerable) {
         self.view = view
         self.networkService = networkService
+        self.imageCacheForCells = imageCache
         self.router = router
     }
     

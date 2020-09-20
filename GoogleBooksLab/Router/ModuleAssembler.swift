@@ -16,12 +16,12 @@ protocol ModuleAssembling {
 class ModuleAssembler: ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController {
         let networkService = NetworkService() // Create network Service
-        
+        let imageCache = ImageCache() // Cache
         let flowLayout = UICollectionViewFlowLayout() // Flow Layout
         flowLayout.scrollDirection = .vertical
         
         let view = ShelfCollectionViewController(collectionViewLayout: flowLayout) // Creste View
-        let presenter = ShelfPresenter(view: view, networkService: networkService, router: router) // Create Presenter with injected View
+        let presenter = ShelfPresenter(view: view, imageCache: imageCache, networkService: networkService, router: router) // Create Presenter with injected View
         
         view.presenter = presenter // Inverse dependency
         

@@ -21,7 +21,7 @@ extension UIImage {
     }
 }
 
-protocol ImageCacheType: class {
+protocol ImageCachable: class {
     // Returns the image associated with a given url
     func image(for url: URL) -> UIImage?
     // Inserts the image of the specified url in the cache
@@ -63,7 +63,7 @@ final class ImageCache {
     }
 }
 
-extension ImageCache: ImageCacheType {
+extension ImageCache: ImageCachable {
     func image(for url: URL) -> UIImage? {
         lock.lock(); defer { lock.unlock() }
         // the best case scenario -> there is a decoded image

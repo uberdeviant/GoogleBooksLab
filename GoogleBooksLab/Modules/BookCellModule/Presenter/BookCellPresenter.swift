@@ -17,7 +17,7 @@ protocol BookCellPresentable {
     
     var bookID: String {get set}
     
-    init(view: BookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCache, router: Routerable, bookItem: BookVolume)
+    init(view: BookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCachable, router: Routerable, bookItem: BookVolume)
     
     func updateCellBy(item: BookVolume)
     func prepareForReuse()
@@ -28,12 +28,12 @@ class BookCellPresenter: BookCellPresentable {
     weak var view: BookCellViewable?
     var router: Routerable
     let networkLayer: NetworkServicing?
-    let imageCache: ImageCache?
+    let imageCache: ImageCachable?
     var bookID: String
     
     var task: URLSessionDataTask?
     
-    required init(view: BookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCache, router: Routerable, bookItem: BookVolume) {
+    required init(view: BookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCachable, router: Routerable, bookItem: BookVolume) {
         self.view = view
         self.networkLayer = networkLayer
         self.imageCache = imageCache
