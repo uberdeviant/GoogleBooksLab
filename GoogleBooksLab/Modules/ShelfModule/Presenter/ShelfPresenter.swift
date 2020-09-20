@@ -23,6 +23,10 @@ protocol ShelfPresentable: class {
     
     func performSearch(by text: String)
     
+    // MARK: - Cache
+    
+    func clearCache()
+    
     // MARK: - Navigation
     
     func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> BookCollectionViewCell?
@@ -47,6 +51,10 @@ class ShelfPresenter: ShelfPresentable {
         self.view = view
         self.networkService = networkService
         self.router = router
+    }
+    
+    func clearCache() {
+        imageCacheForCells.removeAllImages()
     }
     
     func performSearch(by text: String) {

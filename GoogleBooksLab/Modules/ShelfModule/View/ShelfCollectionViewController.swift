@@ -36,6 +36,7 @@ extension ShelfCollectionViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
+            presenter?.clearCache()
             presenter?.performSearch(by: text)
         }
     }
