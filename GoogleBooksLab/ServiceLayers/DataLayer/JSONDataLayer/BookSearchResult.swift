@@ -9,7 +9,7 @@
 import Foundation
 
 struct BookSearchResult: Decodable {
-    let kind: String
-    let totalItems: Int
+    let kind: String?
+    let totalItems: Int?
     let items: [BookVolume]?
 }
