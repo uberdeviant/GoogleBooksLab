@@ -21,7 +21,7 @@ class MockNetworkService: NetworkServicing {
         if text == "error" {
             completion(.failure(NSError(domain: "foo", code: 0, userInfo: nil)))
         } else {
-            completion(.success(returnMockSearchBook()))
+            completion(.success(returnMockSearchResultBooks()))
         }
     }
     
@@ -39,13 +39,15 @@ class MockNetworkService: NetworkServicing {
 // MARK: - Create mock result
 
 extension MockNetworkService {
-    private func returnMockSearchBook() -> BookSearchResult {
+    func returnMockSearchResultBooks(loadImages: Bool = true) -> BookSearchResult {
         
         let bookFormat = BookFormat(isAvailable: false, downloadLink: nil, acsTokenLink: nil)
         
         let accessInfo = AccessInfo(country: "foo", viewability: "bar", embeddable: false, publicDomain: false, textToSpeechPermission: "foo", epub: bookFormat, pdf: bookFormat, webReaderLink: "foo", accessViewStatus: "bar", searchInfo: SearchInfo(textSnippet: "foo"))
        
         let saleInfo = SaleInfo(country: "foo", saleability: "bar", onSaleDate: nil, isEbook: false, listPrice: nil, retailPrice: nil, buyLink: nil)
+        
+        let imageLinks = loadImages ? ImageLinks(smallThumbnail: "foo", thumbnail: "bar", small: nil, medium: nil, large: nil, extraLarge: nil) : nil
         
         // Need to do something with it, maybe create default init
         let bookVolumeInfo = BookVolumeInfo(title: "foo",
@@ -62,7 +64,7 @@ extension MockNetworkService {
                                             averageRating: nil,
                                             ratingCount: nil,
                                             contentVersion: nil,
-                                            imageLinks: nil,
+                                            imageLinks: imageLinks,
                                             language: "foo",
                                             previewLink: "foo",
                                             infoLink: "bar",
