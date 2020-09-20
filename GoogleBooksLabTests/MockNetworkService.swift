@@ -39,6 +39,8 @@ class MockNetworkService: NetworkServicing {
 // MARK: - Create mock result
 
 extension MockNetworkService {
+    
+    //This method needs for views which get bookVolume as a property but not loading it from the Internet
     func returnMockSearchResultBooks(loadImages: Bool = true) -> BookSearchResult {
         
         let bookFormat = BookFormat(isAvailable: false, downloadLink: nil, acsTokenLink: nil)

@@ -72,6 +72,19 @@ class ShelfTests: XCTestCase {
         XCTAssertNil(imageCache.image(for: url))
     }
     
+    func testDequeReusableCellSuccess() {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionViewController = ShelfCollectionViewController(collectionViewLayout: flowLayout)
+        
+        collectionViewController.collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: "bookCell")
+        
+        presenter.performSearch(by: "foo")
+        
+        let cell = presenter.dequeueCell(collectionView: collectionViewController.collectionView, indexPath: IndexPath(item: 0, section: 0), cellId: "bookCell")
+        
+        XCTAssertNotNil(cell)
+    }
+        
     func testGoToDetail() {
         presenter.performSearch(by: "foo")
         presenter.goToDetail(bookId: "bar")
