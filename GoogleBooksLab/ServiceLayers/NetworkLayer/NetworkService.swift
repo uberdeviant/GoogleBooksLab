@@ -15,9 +15,15 @@ protocol NetworkServicing {
 
 class NetworkService: NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q=" + text.lowercased() + "&startIndex=0&maxResults=25" // MAX result is 25, this thing should be in the App settings
         
-        guard let url = URL(string: urlString) else {return}
+        let startIndex = 0
+        let searchMaxResults = 25
+        let searchItem = text
+        
+        let urlManager = GoogleURLServiceManger()
+        let searchURL = urlManager.createSafeSearchUrl(startIndex: startIndex, searchMaxResults: searchMaxResults, searchItem: searchItem)
+        
+        guard let url = searchURL else {return}
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
