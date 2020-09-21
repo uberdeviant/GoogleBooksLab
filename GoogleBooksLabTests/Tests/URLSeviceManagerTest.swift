@@ -30,7 +30,6 @@ struct MockURLServiceManager: URLServiceManagable {
         urlComponents.host = MockBooksURLComponents.host.rawValue
         urlComponents.path = MockBooksURLComponents.searchPath.rawValue
         
-        //Create Queries
         urlComponents.queryItems = [
             URLQueryItem(name: MockBooksQueries.searchTerm.rawValue, value: searchItem),
             URLQueryItem(name: MockBooksQueries.startIndex.rawValue, value: "\(startIndex)"),
