@@ -24,7 +24,7 @@ enum NetworkAPIModel {
     }
 }
 
-//Private computed properties
+// MARK: - Private computed properties
 extension NetworkAPIModel {
     
     private var scheme: String {
