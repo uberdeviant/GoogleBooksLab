@@ -43,7 +43,7 @@ class BookDetailPresenter: BookDetailPresentable {
     func loadImage() {
         guard let link = item?.volumeInfo.imageLinks?.thumbnail,
             let url = URL(string: link) else {return}
-        self.networkLayer?.loadThumbnail(of: url, completion: {[weak self] (result) in
+        self.networkLayer?.createLoadThumbnailTask(of: url, completion: {[weak self] (result) in
             guard let self = self else {return}
             switch result {
             case .success(let data):

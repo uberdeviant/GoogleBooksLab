@@ -10,22 +10,15 @@ import Foundation
 
 protocol NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void)
-    func loadThumbnail(of url: URL, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask
+    func createLoadThumbnailTask(of url: URL, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask
 }
 
 class NetworkService: NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
         
-        let startIndex = 0
-        let searchMaxResults = 25
-        let searchItem = text
+        guard let url = NetworkAPIModel.search(searchText: text).url else {return}
         
-        let urlManager = GoogleURLServiceManger()
-        let searchURL = urlManager.createSafeSearchUrl(startIndex: startIndex, searchMaxResults: searchMaxResults, searchItem: searchItem)
-        
-        guard let url = searchURL else {return}
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -38,10 +31,12 @@ class NetworkService: NetworkServicing {
             } catch {
                 completion(.failure(error))
             }
-        }.resume()
+        }
+        
+        task.resume()
     }
     
-    func loadThumbnail(of url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
+    func createLoadThumbnailTask(of url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
         
         return URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
