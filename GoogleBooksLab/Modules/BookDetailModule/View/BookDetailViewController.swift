@@ -52,6 +52,8 @@ class BookDetailViewController: UIViewController {
         addCornerRadius()
     }
     
+    // MARK: - Actions
+    
     @objc func likeButtonTapped(sender: UIButton) {
         navigationLikeButton.setTitleColor(.systemRed, for: .normal)
     }
