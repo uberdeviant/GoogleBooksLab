@@ -32,6 +32,8 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var pagesLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
+    weak var navigationLikeButton: UIButton!
+    
     // MARK: - Properties
     
     var presenter: BookDetailPresentable?
@@ -40,6 +42,7 @@ class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addFavNavigationButton()
         presenter?.loadImage()
         presenter?.updateLabels()
     }
@@ -48,7 +51,25 @@ class BookDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         addCornerRadius()
     }
+    
+    @objc func likeButtonTapped(sender: UIButton) {
+        navigationLikeButton.setTitleColor(.systemRed, for: .normal)
+    }
+}
 
+// MARK: - Building
+
+extension BookDetailViewController {
+    private func addFavNavigationButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitle("♥︎", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        button.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
+        navigationLikeButton = button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationLikeButton)
+    }
 }
 
 // MARK: - Presenter Dependency
