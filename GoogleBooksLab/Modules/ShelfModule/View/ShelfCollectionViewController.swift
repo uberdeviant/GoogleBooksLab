@@ -133,7 +133,7 @@ extension ShelfCollectionViewController: ShelfViewable {
     }
     
     func falure(error: Error) {
-        print("ERROR", error.localizedDescription)
+        print("ERROR", error)
     }
     
 }
