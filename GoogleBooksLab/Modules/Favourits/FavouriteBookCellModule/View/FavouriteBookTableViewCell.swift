@@ -65,7 +65,7 @@ extension FavouriteBookTableViewCell {
         bookThumbnailImageView.heightAnchor.constraint(equalTo: backShadowView.heightAnchor).isActive = true
     }
     
-    private func addLabels(){
+    private func addLabels() {
         //Creation
         titleBookLabel = createLabel(with: UIFont.preferredFont(forTextStyle: .headline))
         authorsBookLabel = createLabel(with: UIFont.preferredFont(forTextStyle: .body))
@@ -86,11 +86,9 @@ extension FavouriteBookTableViewCell {
         authorsBookLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
         authorsBookLabel.topAnchor.constraint(equalTo: titleBookLabel.bottomAnchor, constant: 15).isActive = true
         authorsBookLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15).isActive = true
-        
-        
     }
     
-    private func createLabel(with font: UIFont) -> UILabel{
+    private func createLabel(with font: UIFont) -> UILabel {
         let label = UILabel()
         label.textAlignment = .left
         label.font = font

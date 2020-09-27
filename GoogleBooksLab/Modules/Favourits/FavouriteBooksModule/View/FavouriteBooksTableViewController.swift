@@ -10,7 +10,6 @@ import UIKit
 
 class FavouriteBooksTableViewController: UITableViewController {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false

@@ -64,8 +64,6 @@ class BookDetailViewController: UIViewController {
 extension BookDetailViewController {
     private func addFavNavigationButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitle("♥︎", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         button.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
