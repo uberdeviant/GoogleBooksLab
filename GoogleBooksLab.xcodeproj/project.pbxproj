@@ -23,6 +23,8 @@
 		D29B68A925175D4400E6E4E2 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */; };
 		D29B68AB2517642700E6E4E2 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68AA2517642700E6E4E2 /* MockImageCache.swift */; };
 		D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A3225209CC300372A66 /* NetworkErrors.swift */; };
+		D2BA2A3A2520AF4C00372A66 /* FavouriteBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A392520AF4C00372A66 /* FavouriteBooksTableViewController.swift */; };
+		D2BA2A402520AFFF00372A66 /* FavouriteBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A3F2520AFFF00372A66 /* FavouriteBookTableViewCell.swift */; };
 		D2CE306C2515F634003FD77A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE306B2515F634003FD77A /* AppDelegate.swift */; };
 		D2CE306E2515F634003FD77A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE306D2515F634003FD77A /* SceneDelegate.swift */; };
 		D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */; };
@@ -69,6 +71,8 @@
 		D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		D29B68AA2517642700E6E4E2 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
 		D2BA2A3225209CC300372A66 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
+		D2BA2A392520AF4C00372A66 /* FavouriteBooksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBooksTableViewController.swift; sourceTree = "<group>"; };
+		D2BA2A3F2520AFFF00372A66 /* FavouriteBookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBookTableViewCell.swift; sourceTree = "<group>"; };
 		D2CE30682515F634003FD77A /* GoogleBooksLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleBooksLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CE306B2515F634003FD77A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2CE306D2515F634003FD77A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +175,72 @@
 			path = LogicHelpers;
 			sourceTree = "<group>";
 		};
+		D27C00282520B6FB00D0905C /* Favourits */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA2A362520AF1600372A66 /* FavouriteBooksModule */,
+				D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */,
+			);
+			path = Favourits;
+			sourceTree = "<group>";
+		};
+		D27C00292520B71000D0905C /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				D264BC3D25168985005EA18F /* BookDetailModule */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		D27C002A2520B73800D0905C /* Shelf */ = {
+			isa = PBXGroup;
+			children = (
+				D2CE30AC25160C50003FD77A /* BookCellModule */,
+				D2CE30912515F67E003FD77A /* ShelfModule */,
+			);
+			path = Shelf;
+			sourceTree = "<group>";
+		};
+		D2BA2A362520AF1600372A66 /* FavouriteBooksModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA2A382520AF2800372A66 /* Presenter */,
+				D2BA2A372520AF2300372A66 /* View */,
+			);
+			path = FavouriteBooksModule;
+			sourceTree = "<group>";
+		};
+		D2BA2A372520AF2300372A66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA2A392520AF4C00372A66 /* FavouriteBooksTableViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2BA2A382520AF2800372A66 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA2A3E2520AFD600372A66 /* View */,
+			);
+			path = FavouriteBookCellModule;
+			sourceTree = "<group>";
+		};
+		D2BA2A3E2520AFD600372A66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA2A3F2520AFFF00372A66 /* FavouriteBookTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D2C12A8B2519108100F830BF /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,9 +301,9 @@
 		D2CE30902515F65E003FD77A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				D264BC3D25168985005EA18F /* BookDetailModule */,
-				D2CE30AC25160C50003FD77A /* BookCellModule */,
-				D2CE30912515F67E003FD77A /* ShelfModule */,
+				D27C002A2520B73800D0905C /* Shelf */,
+				D27C00292520B71000D0905C /* Details */,
+				D27C00282520B6FB00D0905C /* Favourits */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -472,6 +542,7 @@
 				D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */,
 				D264BC3A251662E8005EA18F /* ImageCache.swift in Sources */,
 				D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */,
+				D2BA2A402520AFFF00372A66 /* FavouriteBookTableViewCell.swift in Sources */,
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
 				D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */,
 				D264BC3625166093005EA18F /* BookCellPresenter.swift in Sources */,
@@ -481,6 +552,7 @@
 				D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */,
 				D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */,
 				D264BC4C2516959E005EA18F /* DoubleExtensions.swift in Sources */,
+				D2BA2A3A2520AF4C00372A66 /* FavouriteBooksTableViewController.swift in Sources */,
 				D2CE309F2515FA40003FD77A /* ModuleAssembler.swift in Sources */,
 				D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */,
 				D264BC4325168B1D005EA18F /* BookDetailViewController.swift in Sources */,

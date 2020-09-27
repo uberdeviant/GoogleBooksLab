@@ -176,10 +176,10 @@ extension ShelfCollectionViewController {
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         button.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
-        button.clipsToBounds = true
         button.layer.cornerRadius = button.bounds.height / 2
         
         button.addTarget(self, action: #selector(favouritsButtonTapped(sender:)), for: .touchUpInside)
+        button.addShadow()
         
         favoutitesButton = button
     }
