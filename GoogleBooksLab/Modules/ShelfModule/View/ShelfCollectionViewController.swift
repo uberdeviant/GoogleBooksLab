@@ -12,6 +12,7 @@ class ShelfCollectionViewController: UICollectionViewController {
 
     // MARK: - UI Properties
     
+    weak var favoutitesButton: UIButton!
     var searchController: UISearchController!
     
     // MARK: - Properties
@@ -26,6 +27,23 @@ class ShelfCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         updateUI()
         createSearchBar()
+        addFavButton()
+    }
+    
+    // MARK: Actions
+    
+    @objc func favouritsButtonTapped(sender: UIButton) {
+        UIView.animate(withDuration: 0.2) {
+            sender.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        } completion: { (_) in
+            UIView.animate(withDuration: 0.2) {
+                sender.transform = .identity
+            } completion: { (_) in
+                //goto favourits
+            }
+
+        }
+
     }
     
 }
@@ -115,7 +133,7 @@ extension ShelfCollectionViewController: ShelfViewable {
     }
     
     func falure(error: Error) {
-        print("ERROR", error)
+        print("ERROR", error.localizedDescription)
     }
     
 }
@@ -142,5 +160,27 @@ extension ShelfCollectionViewController {
         
         self.navigationItem.titleView = searchController.searchBar
         searchController.searchBar.delegate = self
+    }
+    
+    private func addFavButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        button.setTitle("♥︎", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        button.setTitleColor(UIColor.systemBackground.withAlphaComponent(0.7), for: .normal)
+        button.backgroundColor = UIColor.label.withAlphaComponent(0.7)
+        
+        self.view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -35).isActive = true
+        button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -35).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        button.clipsToBounds = true
+        button.layer.cornerRadius = button.bounds.height / 2
+        
+        button.addTarget(self, action: #selector(favouritsButtonTapped(sender:)), for: .touchUpInside)
+        
+        favoutitesButton = button
     }
 }
