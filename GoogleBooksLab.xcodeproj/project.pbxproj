@@ -22,6 +22,7 @@
 		D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */; };
 		D29B68A925175D4400E6E4E2 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */; };
 		D29B68AB2517642700E6E4E2 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68AA2517642700E6E4E2 /* MockImageCache.swift */; };
+		D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A3225209CC300372A66 /* NetworkErrors.swift */; };
 		D2CE306C2515F634003FD77A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE306B2515F634003FD77A /* AppDelegate.swift */; };
 		D2CE306E2515F634003FD77A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CE306D2515F634003FD77A /* SceneDelegate.swift */; };
 		D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */; };
@@ -67,6 +68,7 @@
 		D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCollectionViewController.swift; sourceTree = "<group>"; };
 		D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		D29B68AA2517642700E6E4E2 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
+		D2BA2A3225209CC300372A66 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
 		D2CE30682515F634003FD77A /* GoogleBooksLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleBooksLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CE306B2515F634003FD77A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2CE306D2515F634003FD77A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				D2CE30A02515FB40003FD77A /* NetworkService.swift */,
 				D28201D8251FC256008FF395 /* NetworkApiModel.swift */,
+				D2BA2A3225209CC300372A66 /* NetworkErrors.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				D264BC4725169243005EA18F /* BookDetailPresenter.swift in Sources */,
 				D2CE306C2515F634003FD77A /* AppDelegate.swift in Sources */,
 				D28201D9251FC256008FF395 /* NetworkApiModel.swift in Sources */,
+				D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */,
 				D2CE30BE25163168003FD77A /* BookSearchResult.swift in Sources */,
 				D2CE306E2515F634003FD77A /* SceneDelegate.swift in Sources */,
 			);

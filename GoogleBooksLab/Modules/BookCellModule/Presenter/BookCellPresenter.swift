@@ -58,7 +58,7 @@ class BookCellPresenter: BookCellPresentable {
             view?.updateCellBy(image: image, title: item.volumeInfo.title)
         } else {
             //If cache doesn't contains an image, load it from the web.
-            task = networkLayer?.createLoadThumbnailTask(of: imageURL, completion: {[weak self] (completion) in
+            task = networkLayer?.createLoadThumbnailTask(of: link, completion: {[weak self] (completion) in
                 guard let self = self else {return}
                 switch completion {
                 case .success(let data):

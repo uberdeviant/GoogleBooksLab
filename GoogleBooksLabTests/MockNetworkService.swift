@@ -25,7 +25,7 @@ class MockNetworkService: NetworkServicing {
         }
     }
     
-    func createLoadThumbnailTask(of url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
+    func createLoadThumbnailTask(of stringURL: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask? {
         if successThumbnail {
             completion(.success(Data()))
         } else {

@@ -10,13 +10,17 @@ import Foundation
 
 protocol NetworkServicing {
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void)
-    func createLoadThumbnailTask(of url: URL, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask
+    func createLoadThumbnailTask(of stringURL: String, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask?
 }
 
 class NetworkService: NetworkServicing {
+    
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
         
-        guard let url = NetworkAPIModel.search(searchText: text).url else {return}
+        guard let url = NetworkAPIModel.search(searchText: text).url else {
+            completion(.failure(NetworkErrors.invalidURL))
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
@@ -25,7 +29,7 @@ class NetworkService: NetworkServicing {
             }
             
             do {
-                guard let data = data else { print("nil search data"); return }
+                guard let data = data else { completion(.failure(NetworkErrors.nullDataFetched)); return }
                 let searchResults = try JSONDecoder().decode(BookSearchResult.self, from: data)
                 completion(.success(searchResults))
             } catch {
@@ -36,9 +40,14 @@ class NetworkService: NetworkServicing {
         task.resume()
     }
     
-    func createLoadThumbnailTask(of url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask {
+    func createLoadThumbnailTask(of stringURL: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask? {
         
-        return URLSession.shared.dataTask(with: url) { (data, _, error) in
+        guard let url = URL(string: stringURL) else {
+            completion(.failure(NetworkErrors.invalidURL))
+            return nil
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 completion(.failure(error))
             }
@@ -47,5 +56,7 @@ class NetworkService: NetworkServicing {
                 completion(.success(data))
             }
         }
+        
+        return task
     }
 }
