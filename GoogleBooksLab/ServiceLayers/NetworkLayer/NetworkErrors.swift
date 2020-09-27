@@ -22,13 +22,4 @@ extension NetworkErrors: LocalizedError {
             return NSLocalizedString("Fetched data is equal nil", comment: "localised custom error")
         }
     }
-    
-    var errorCode: Int {
-        switch self {
-        case .invalidURL:
-            return 666
-        case .nullDataFetched:
-            return 54
-        }
-    }
 }
