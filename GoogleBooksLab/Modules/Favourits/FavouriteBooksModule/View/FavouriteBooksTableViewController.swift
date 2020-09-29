@@ -12,8 +12,7 @@ class FavouriteBooksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.clearsSelectionOnViewWillAppear = false
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        updateTableView()
     }
 
     // MARK: - Table view data source
@@ -83,4 +82,15 @@ class FavouriteBooksTableViewController: UITableViewController {
     }
     */
 
+}
+
+// MARK: - Building
+
+extension FavouriteBooksTableViewController {
+    func updateTableView() {
+        self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let cellNib = UINib(nibName: "FavouriteTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "favouriteCell")
+    }
 }

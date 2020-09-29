@@ -20,6 +20,8 @@
 		D264BC4C2516959E005EA18F /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4B2516959E005EA18F /* DoubleExtensions.swift */; };
 		D28201D9251FC256008FF395 /* NetworkApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28201D8251FC256008FF395 /* NetworkApiModel.swift */; };
 		D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */; };
+		D28B14462523AC1F00C5FDA9 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */; };
+		D28B14472523AC1F00C5FDA9 /* FavouriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28B14452523AC1F00C5FDA9 /* FavouriteTableViewCell.xib */; };
 		D29B68A925175D4400E6E4E2 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */; };
 		D29B68AB2517642700E6E4E2 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68AA2517642700E6E4E2 /* MockImageCache.swift */; };
 		D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A3225209CC300372A66 /* NetworkErrors.swift */; };
@@ -67,6 +69,8 @@
 		D264BC4B2516959E005EA18F /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		D28201D8251FC256008FF395 /* NetworkApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApiModel.swift; sourceTree = "<group>"; };
 		D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCollectionViewController.swift; sourceTree = "<group>"; };
+		D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		D28B14452523AC1F00C5FDA9 /* FavouriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteTableViewCell.xib; sourceTree = "<group>"; };
 		D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		D29B68AA2517642700E6E4E2 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
 		D2BA2A3225209CC300372A66 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		D2BA2A3E2520AFD600372A66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */,
+				D28B14452523AC1F00C5FDA9 /* FavouriteTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,6 +504,7 @@
 				D2CE30AB25160560003FD77A /* .swiftlint.yml in Resources */,
 				D2CE307B2515F638003FD77A /* LaunchScreen.storyboard in Resources */,
 				D2CE30782515F638003FD77A /* Assets.xcassets in Resources */,
+				D28B14472523AC1F00C5FDA9 /* FavouriteTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +549,7 @@
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
 				D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */,
 				D264BC3625166093005EA18F /* BookCellPresenter.swift in Sources */,
+				D28B14462523AC1F00C5FDA9 /* FavouriteTableViewCell.swift in Sources */,
 				D2CE30B82516280C003FD77A /* BoolVolumeInfo.swift in Sources */,
 				D2CE309D2515F8DD003FD77A /* Router.swift in Sources */,
 				D2CE30B62516219E003FD77A /* BookVolume.swift in Sources */,
