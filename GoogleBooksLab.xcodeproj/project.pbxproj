@@ -18,6 +18,11 @@
 		D264BC4425168B1D005EA18F /* BookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D264BC4225168B1D005EA18F /* BookDetailViewController.xib */; };
 		D264BC4725169243005EA18F /* BookDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4625169243005EA18F /* BookDetailPresenter.swift */; };
 		D264BC4C2516959E005EA18F /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4B2516959E005EA18F /* DoubleExtensions.swift */; };
+		D27702482528885100C3CA72 /* DataBaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27702472528885100C3CA72 /* DataBaseLayer.swift */; };
+		D277024D2528903C00C3CA72 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277024C2528903C00C3CA72 /* BookModel.swift */; };
+		D27702512528908100C3CA72 /* ImageLinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27702502528908100C3CA72 /* ImageLinksModel.swift */; };
+		D27702552528909A00C3CA72 /* BookExtendedInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27702542528909A00C3CA72 /* BookExtendedInfoModel.swift */; };
+		D27702612528BAD900C3CA72 /* FavouriteBooksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27702602528BAD900C3CA72 /* FavouriteBooksPresenter.swift */; };
 		D28201D9251FC256008FF395 /* NetworkApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28201D8251FC256008FF395 /* NetworkApiModel.swift */; };
 		D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */; };
 		D28B14462523AC1F00C5FDA9 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */; };
@@ -67,6 +72,11 @@
 		D264BC4225168B1D005EA18F /* BookDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailViewController.xib; sourceTree = "<group>"; };
 		D264BC4625169243005EA18F /* BookDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailPresenter.swift; sourceTree = "<group>"; };
 		D264BC4B2516959E005EA18F /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
+		D27702472528885100C3CA72 /* DataBaseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseLayer.swift; sourceTree = "<group>"; };
+		D277024C2528903C00C3CA72 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		D27702502528908100C3CA72 /* ImageLinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLinksModel.swift; sourceTree = "<group>"; };
+		D27702542528909A00C3CA72 /* BookExtendedInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookExtendedInfoModel.swift; sourceTree = "<group>"; };
+		D27702602528BAD900C3CA72 /* FavouriteBooksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBooksPresenter.swift; sourceTree = "<group>"; };
 		D28201D8251FC256008FF395 /* NetworkApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApiModel.swift; sourceTree = "<group>"; };
 		D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCollectionViewController.swift; sourceTree = "<group>"; };
 		D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +187,26 @@
 			path = LogicHelpers;
 			sourceTree = "<group>";
 		};
+		D27702462528880900C3CA72 /* DataBaseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D277024B2528900E00C3CA72 /* CoreDataModels */,
+				D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */,
+				D27702472528885100C3CA72 /* DataBaseLayer.swift */,
+			);
+			path = DataBaseLayer;
+			sourceTree = "<group>";
+		};
+		D277024B2528900E00C3CA72 /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				D277024C2528903C00C3CA72 /* BookModel.swift */,
+				D27702502528908100C3CA72 /* ImageLinksModel.swift */,
+				D27702542528909A00C3CA72 /* BookExtendedInfoModel.swift */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
 		D27C00282520B6FB00D0905C /* Favourits */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +253,7 @@
 		D2BA2A382520AF2800372A66 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D27702602528BAD900C3CA72 /* FavouriteBooksPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -374,9 +405,9 @@
 		D2CE30A425160378003FD77A /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				D27702462528880900C3CA72 /* DataBaseLayer */,
 				D264BC38251662D1005EA18F /* Cache */,
 				D2CE30B42516217E003FD77A /* JSONDataLayer */,
-				D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -548,11 +579,13 @@
 				D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */,
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
 				D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */,
+				D277024D2528903C00C3CA72 /* BookModel.swift in Sources */,
 				D264BC3625166093005EA18F /* BookCellPresenter.swift in Sources */,
 				D28B14462523AC1F00C5FDA9 /* FavouriteTableViewCell.swift in Sources */,
 				D2CE30B82516280C003FD77A /* BoolVolumeInfo.swift in Sources */,
 				D2CE309D2515F8DD003FD77A /* Router.swift in Sources */,
 				D2CE30B62516219E003FD77A /* BookVolume.swift in Sources */,
+				D27702512528908100C3CA72 /* ImageLinksModel.swift in Sources */,
 				D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */,
 				D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */,
 				D264BC4C2516959E005EA18F /* DoubleExtensions.swift in Sources */,
@@ -561,7 +594,10 @@
 				D2CE30762515F634003FD77A /* GoogleBooksLab.xcdatamodeld in Sources */,
 				D264BC4325168B1D005EA18F /* BookDetailViewController.swift in Sources */,
 				D264BC4725169243005EA18F /* BookDetailPresenter.swift in Sources */,
+				D27702612528BAD900C3CA72 /* FavouriteBooksPresenter.swift in Sources */,
 				D2CE306C2515F634003FD77A /* AppDelegate.swift in Sources */,
+				D27702482528885100C3CA72 /* DataBaseLayer.swift in Sources */,
+				D27702552528909A00C3CA72 /* BookExtendedInfoModel.swift in Sources */,
 				D28201D9251FC256008FF395 /* NetworkApiModel.swift in Sources */,
 				D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */,
 				D2CE30BE25163168003FD77A /* BookSearchResult.swift in Sources */,

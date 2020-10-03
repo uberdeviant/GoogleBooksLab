@@ -31,7 +31,9 @@ class ModuleAssembler: ModuleAssembling {
     func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController {
         let networkService = NetworkService() // Create network Service
         let view = BookDetailViewController() // Creste View
-        let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router) // Create Presenter with injected View
+        let persistantContainer = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+        let dataBasing = DataBaseLayer()
+        let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router, persistentContainer: persistantContainer, dataBasing: dataBasing) // Create Presenter with injected View
         
         view.presenter = presenter // Inverse dependency
         

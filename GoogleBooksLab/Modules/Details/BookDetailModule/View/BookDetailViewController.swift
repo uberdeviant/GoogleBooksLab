@@ -45,6 +45,7 @@ class BookDetailViewController: UIViewController {
         addFavNavigationButton()
         presenter?.loadImage()
         presenter?.updateLabels()
+        presenter?.loadFavourite()
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,7 +56,7 @@ class BookDetailViewController: UIViewController {
     // MARK: - Actions
     
     @objc func likeButtonTapped(sender: UIButton) {
-        navigationLikeButton.setTitleColor(.systemRed, for: .normal)
+        presenter?.heartTapped()
     }
 }
 
@@ -75,6 +76,12 @@ extension BookDetailViewController {
 // MARK: - Presenter Dependency
 
 extension BookDetailViewController: BookDetailViewable {
+    func favouritsUpdated(value: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationLikeButton.setTitleColor(value ? .systemRed : .label, for: .normal)
+        }
+    }
+    
     func imageLoadFailure(error: Error) {
         //
     }
