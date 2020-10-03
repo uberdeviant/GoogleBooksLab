@@ -47,8 +47,6 @@ class DataBaseLayer: DataBasing {
         extendedBook.imageLinksModel = imageLinks
         imageLinks?.bookExtendedInfoModel = extendedBook
         
-        context.insert(book)
-        
         try? context.save()
             
     }
