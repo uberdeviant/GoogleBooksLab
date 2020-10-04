@@ -39,7 +39,7 @@ class ShelfCollectionViewController: UICollectionViewController {
             UIView.animate(withDuration: 0.2) {
                 sender.transform = .identity
             } completion: { (_) in
-                //goto favourits
+                self.presenter?.goToFavourites()
             }
 
         }

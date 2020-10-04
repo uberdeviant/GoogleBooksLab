@@ -32,6 +32,8 @@ protocol ShelfPresentable: class {
     func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> BookCollectionViewCell?
     
     func goToDetail(bookId: String?)
+    
+    func goToFavourites()
 }
 
 class ShelfPresenter: ShelfPresentable {
@@ -80,5 +82,9 @@ class ShelfPresenter: ShelfPresentable {
             router?.instantiateDetailViewController(by: book)
             break // O(log n) ?
         }
+    }
+    
+    func goToFavourites() {
+        router?.instantiateFavouriteBooks(imageCahe: imageCacheForCells)
     }
 }

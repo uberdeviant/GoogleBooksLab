@@ -27,6 +27,7 @@
 		D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */; };
 		D28B14462523AC1F00C5FDA9 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */; };
 		D28B14472523AC1F00C5FDA9 /* FavouriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28B14452523AC1F00C5FDA9 /* FavouriteTableViewCell.xib */; };
+		D2991621252A291B007C0974 /* FavouriteCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2991620252A291B007C0974 /* FavouriteCellPresenter.swift */; };
 		D29B68A925175D4400E6E4E2 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */; };
 		D29B68AB2517642700E6E4E2 /* MockImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B68AA2517642700E6E4E2 /* MockImageCache.swift */; };
 		D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA2A3225209CC300372A66 /* NetworkErrors.swift */; };
@@ -81,6 +82,7 @@
 		D289A5E92516B4D400E9D9F3 /* ShelfCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCollectionViewController.swift; sourceTree = "<group>"; };
 		D28B14442523AC1F00C5FDA9 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		D28B14452523AC1F00C5FDA9 /* FavouriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteTableViewCell.xib; sourceTree = "<group>"; };
+		D2991620252A291B007C0974 /* FavouriteCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCellPresenter.swift; sourceTree = "<group>"; };
 		D29B68A825175D4400E6E4E2 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		D29B68AA2517642700E6E4E2 /* MockImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageCache.swift; sourceTree = "<group>"; };
 		D2BA2A3225209CC300372A66 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
@@ -233,6 +235,14 @@
 			path = Shelf;
 			sourceTree = "<group>";
 		};
+		D299161F252A2903007C0974 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D2991620252A291B007C0974 /* FavouriteCellPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		D2BA2A362520AF1600372A66 /* FavouriteBooksModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +271,7 @@
 		D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */ = {
 			isa = PBXGroup;
 			children = (
+				D299161F252A2903007C0974 /* Presenter */,
 				D2BA2A3E2520AFD600372A66 /* View */,
 			);
 			path = FavouriteBookCellModule;
@@ -587,6 +598,7 @@
 				D2CE30B62516219E003FD77A /* BookVolume.swift in Sources */,
 				D27702512528908100C3CA72 /* ImageLinksModel.swift in Sources */,
 				D2CE30AF25160C98003FD77A /* BookCollectionViewCell.swift in Sources */,
+				D2991621252A291B007C0974 /* FavouriteCellPresenter.swift in Sources */,
 				D2CE30A12515FB40003FD77A /* NetworkService.swift in Sources */,
 				D264BC4C2516959E005EA18F /* DoubleExtensions.swift in Sources */,
 				D2BA2A3A2520AF4C00372A66 /* FavouriteBooksTableViewController.swift in Sources */,

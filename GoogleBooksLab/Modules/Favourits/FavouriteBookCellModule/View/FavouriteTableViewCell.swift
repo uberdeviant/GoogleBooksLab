@@ -10,6 +10,8 @@ import UIKit
 
 class FavouriteTableViewCell: UITableViewCell {
 
+    var presenter: FavouriteCellPresenter?
+    
     @IBOutlet weak var backView: UIView! {
         didSet {
             backView.layer.cornerRadius = 12
@@ -36,8 +38,11 @@ class FavouriteTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        bookImageView.image = nil
         authorsLabel.text = nil
         categoryLabel.text = nil
+        
+        presenter?.prepareForReuse()
     }
     
     override func awakeFromNib() {
@@ -49,6 +54,19 @@ class FavouriteTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+}
+
+// MARK: - Presenter dependency
+
+extension FavouriteTableViewCell: FavouriteCellViewable {
+    func updateCellBy(image: UIImage?, title: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.titleLabel.text = title
+            self.bookImageView.image = image
+        }
     }
     
 }

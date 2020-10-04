@@ -11,6 +11,7 @@ import UIKit
 protocol ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController
     func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController
+    func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController
 }
 
 class ModuleAssembler: ModuleAssembling {
@@ -36,6 +37,16 @@ class ModuleAssembler: ModuleAssembling {
         let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router, persistentContainer: persistantContainer, dataBasing: dataBasing) // Create Presenter with injected View
         
         view.presenter = presenter // Inverse dependency
+        
+        return view
+    }
+    
+    func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController {
+        let view = FavouriteBooksTableViewController()
+        let persistantContainer = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+        let dataBasing = DataBaseLayer()
+        let presenter = FavouriteBooksPresenter(view: view, persistantContainer: persistantContainer, dataBaseLayer: dataBasing, imageCache: imageCache, router: router)
+        view.presenter = presenter
         
         return view
     }

@@ -21,7 +21,9 @@ protocol Routerable: RouterContainable {
     
     func instantiateShelfViewController()
     func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell?
+    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?, imageCache: ImageCachable) -> FavouriteTableViewCell?
     func instantiateDetailViewController(by item: BookVolume?)
+    func instantiateFavouriteBooks(imageCahe: ImageCachable)
     func popToRoot()
 }
 
@@ -56,11 +58,30 @@ class Router: Routerable {
         
     }
     
+    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?, imageCache: ImageCachable) -> FavouriteTableViewCell? {
+        //We need to use AnyObject because we don't want to import UIKit for presenter
+        guard let tableView = tableView as? UITableView, let model = model else {return nil}
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? FavouriteTableViewCell else {return nil}
+        let networkService = NetworkService()
+        let presenter = FavouriteCellPresenter(view: cell, networkLayer: networkService, imageCache: imageCache, router: self, bookModel: model)
+        cell.presenter = presenter
+        
+        return cell
+        
+    }
+    
     func instantiateDetailViewController(by item: BookVolume?) {
         guard let navigationController = navigationController,
         let detailViewController = moduleAssembler?.createDetailModule(item: item, router: self) else {return}
         
         navigationController.pushViewController(detailViewController, animated: true)
+    }
+    
+    func instantiateFavouriteBooks(imageCahe: ImageCachable) {
+        guard let navigationController = navigationController,
+              let favouritesTableViewController = moduleAssembler?.createFavouritesModule(imageCache: imageCahe, router: self) else {return}
+        navigationController.present(favouritesTableViewController, animated: true, completion: nil)
     }
     
     func popToRoot() {

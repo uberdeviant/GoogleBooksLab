@@ -17,25 +17,37 @@ protocol FavouriteBooksPresentable {
     
     var favouriteBooks: [BookModel] {get set}
     
-    init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer, dataBaseLayer: DataBasing)
+    init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer?, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable)
     
     func loadBooks()
+    
+    func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell?
 }
 
-class FavouritsBooksPresenter: FavouriteBooksPresentable {
-    var persistantContainer: NSPersistentContainer
+class FavouriteBooksPresenter: FavouriteBooksPresentable {
+    var persistantContainer: NSPersistentContainer?
     let dataBaseLayer: DataBasing
     var favouriteBooks: [BookModel] = []
+    var imageCache: ImageCachable
+    var router: Routerable?
+    
     weak var view: FavouriteBooksViewable?
     
-    required init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer, dataBaseLayer: DataBasing) {
+    required init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer?, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable) {
         self.persistantContainer = persistantContainer
         self.dataBaseLayer = dataBaseLayer
+        self.imageCache = imageCache
         self.view = view
+        self.router = router
+    }
+    
+    func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell? {
+        let model = favouriteBooks[indexPath.row]
+        return router?.dequeReusableFavouriteCell(for: tableView, indexPath: indexPath, cellId: cellId, model: model, imageCache: imageCache)
     }
     
     func loadBooks() {
-        persistantContainer.performBackgroundTask { [weak self] (context) in
+        persistantContainer?.performBackgroundTask { [weak self] (context) in
             self?.dataBaseLayer.loadAllDataObjects(in: context) { (results) in
                 self?.favouriteBooks = results
                 self?.view?.dataLoaded()
@@ -44,7 +56,7 @@ class FavouritsBooksPresenter: FavouriteBooksPresentable {
     }
     
     func deleteBook(volumeID: String) {
-        persistantContainer.performBackgroundTask { [weak self] (context) in
+        persistantContainer?.performBackgroundTask { [weak self] (context) in
             self?.dataBaseLayer.deleteBookModel(volumeId: volumeID, in: context)
             self?.view?.dataLoaded()
         }
