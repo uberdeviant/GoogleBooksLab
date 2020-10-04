@@ -27,7 +27,6 @@ class FavouriteBooksTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return presenter?.favouriteBooks.count ?? 0
     }
 
@@ -37,6 +36,10 @@ class FavouriteBooksTableViewController: UITableViewController {
         } else {
             return UITableViewCell()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.rowSelected(at: indexPath)
     }
 
 }
@@ -56,12 +59,6 @@ extension FavouriteBooksTableViewController {
 
 extension FavouriteBooksTableViewController: FavouriteBooksViewable {
     func dataLoaded() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            print(self.presenter!.favouriteBooks.count)
-            for book in self.presenter!.favouriteBooks {
-                print(book.bookExtendedInfoModel?.title)
-            }
-        }
+        tableView.reloadData()
     }
 }

@@ -15,7 +15,7 @@ protocol DataBasing {
     
     func deleteBookModel(volumeId: String, in context: NSManagedObjectContext)
     
-    func loadAllDataObjects(in context: NSManagedObjectContext, completion: @escaping([BookModel]) -> Void)
+    func loadAllDataObjects(in context: NSManagedObjectContext) -> [BookModel]
 }
 
 class DataBaseLayer: DataBasing {
@@ -42,13 +42,10 @@ class DataBaseLayer: DataBasing {
         let imageLinks = ImageLinksModel.createModel(from: bookVolume.volumeInfo.imageLinks, context: context)
         
         //Relations
-        book.bookExtendedInfoModel = extendedBook
-        extendedBook.bookModel = book
         extendedBook.imageLinksModel = imageLinks
-        imageLinks?.bookExtendedInfoModel = extendedBook
+        book.bookExtendedInfoModel = extendedBook
         
         try? context.save()
-            
     }
     
     func deleteBookModel(volumeId: String, in context: NSManagedObjectContext) {
@@ -59,17 +56,17 @@ class DataBaseLayer: DataBasing {
         
     }
     
-    func loadAllDataObjects(in context: NSManagedObjectContext, completion: @escaping([BookModel]) -> Void) {
-        context.perform {
-            let request: NSFetchRequest<BookModel> = BookModel.fetchRequest()
-            do {
-                let objects = try? context.fetch(request)
-                if objects != nil {
-                    completion(objects!)
-                } else {
-                    completion([])
-                }
-            }
+    func loadAllDataObjects(in context: NSManagedObjectContext) -> [BookModel] {
+            
+        let request: NSFetchRequest<BookModel> = BookModel.fetchRequest()
+        
+        do {
+            let objects = try context.fetch(request)
+            return objects
+        } catch {
+            print(error.localizedDescription)
+            return []
         }
+        
     }
 }

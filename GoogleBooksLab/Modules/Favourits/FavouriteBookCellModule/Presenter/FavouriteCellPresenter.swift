@@ -10,7 +10,7 @@ import Foundation
 import UIKit.UIImage
 
 protocol FavouriteCellViewable: class {
-    func updateCellBy(image: UIImage?, title: String)
+    func updateCellBy(image: UIImage?, extendedInfoModel: BookExtendedInfoModel?)
 }
 
 protocol FavouriteCellPresentable {
@@ -48,16 +48,15 @@ class FavouriteCellPresenter: FavouriteCellPresentable {
     }
     
     func updateCellBy(model: BookModel) {
-        let bookTitle = model.bookExtendedInfoModel?.title ?? "Unknown"
         
         guard let link = model.bookExtendedInfoModel?.imageLinksModel?.smallThumbnail,
             let imageURL = URL(string: link) else {
-            view?.updateCellBy(image: nil, title: bookTitle)
+            view?.updateCellBy(image: nil, extendedInfoModel: model.bookExtendedInfoModel)
             return
         }
         if let image = imageCache?.image(for: imageURL) {
             //If cache contains an image with the url, use it.
-            view?.updateCellBy(image: image, title: bookTitle)
+            view?.updateCellBy(image: image, extendedInfoModel: model.bookExtendedInfoModel)
         } else {
             //If cache doesn't contains an image, load it from the web.
             task = networkLayer?.createLoadThumbnailTask(of: link, completion: {[weak self] (completion) in
@@ -67,10 +66,10 @@ class FavouriteCellPresenter: FavouriteCellPresentable {
                     //If everyrhing goes well, then save it into the cache and apply for the cell.
                     let image = UIImage(data: data)
                     self.imageCache?.insertImage(image, for: imageURL)
-                    self.view?.updateCellBy(image: image, title: bookTitle)
+                    self.view?.updateCellBy(image: image, extendedInfoModel: model.bookExtendedInfoModel)
                 case .failure(_):
                     //If everyrhing has been failed, then update cell only by title.
-                    self.view?.updateCellBy(image: nil, title: bookTitle)
+                    self.view?.updateCellBy(image: nil, extendedInfoModel: model.bookExtendedInfoModel)
                 }
             })
             task?.resume()

@@ -61,10 +61,12 @@ class FavouriteTableViewCell: UITableViewCell {
 // MARK: - Presenter dependency
 
 extension FavouriteTableViewCell: FavouriteCellViewable {
-    func updateCellBy(image: UIImage?, title: String) {
+    func updateCellBy(image: UIImage?, extendedInfoModel: BookExtendedInfoModel?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            self.titleLabel.text = title
+            self.titleLabel.text = extendedInfoModel?.title ?? "Unknown"
+            self.authorsLabel.text = extendedInfoModel?.authors?.joined(separator: "\n") ?? "Unknown"
+            self.categoryLabel.text = extendedInfoModel?.categories?.first ?? "Unknown"
             self.bookImageView.image = image
         }
     }

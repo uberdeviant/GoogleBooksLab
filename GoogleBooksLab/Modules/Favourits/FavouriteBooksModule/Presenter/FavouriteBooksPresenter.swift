@@ -21,6 +21,8 @@ protocol FavouriteBooksPresentable {
     
     func loadBooks()
     
+    func rowSelected(at indexPath: IndexPath)
+    
     func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell?
 }
 
@@ -47,12 +49,9 @@ class FavouriteBooksPresenter: FavouriteBooksPresentable {
     }
     
     func loadBooks() {
-        persistantContainer?.performBackgroundTask { [weak self] (context) in
-            self?.dataBaseLayer.loadAllDataObjects(in: context) { (results) in
-                self?.favouriteBooks = results
-                self?.view?.dataLoaded()
-            }
-        }
+        guard let context = persistantContainer?.viewContext else {return}
+        favouriteBooks = dataBaseLayer.loadAllDataObjects(in: context)
+        self.view?.dataLoaded()
     }
     
     func deleteBook(volumeID: String) {
@@ -60,6 +59,10 @@ class FavouriteBooksPresenter: FavouriteBooksPresentable {
             self?.dataBaseLayer.deleteBookModel(volumeId: volumeID, in: context)
             self?.view?.dataLoaded()
         }
+    }
+    
+    func rowSelected(at indexPath: IndexPath) {
+        
     }
 
 }
