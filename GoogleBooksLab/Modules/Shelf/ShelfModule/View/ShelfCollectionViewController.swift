@@ -33,17 +33,19 @@ class ShelfCollectionViewController: UICollectionViewController {
     // MARK: Actions
     
     @objc func favouritsButtonTapped(sender: UIButton) {
-        UIView.animate(withDuration: 0.2) {
-            sender.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        } completion: { (_) in
+        searchController.dismiss(animated: true) {
+            
             UIView.animate(withDuration: 0.2) {
-                sender.transform = .identity
+                sender.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             } completion: { (_) in
-                self.presenter?.goToFavourites()
+                UIView.animate(withDuration: 0.2) {
+                    sender.transform = .identity
+                } completion: { (_) in
+                    self.presenter?.goToFavourites()
+                }
             }
-
+            
         }
-
     }
     
 }
