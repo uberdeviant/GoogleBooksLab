@@ -79,7 +79,7 @@ class ShelfPresenter: ShelfPresentable {
     func goToDetail(bookId: String?) {
         guard let items = booksSearchResults?.items, let bookId = bookId else {return}
         for book in items where book.id == bookId {
-            router?.instantiateDetailViewController(by: book)
+            router?.instantiateDetailViewController(by: book, needsToPush: true)
             break // O(log n) ?
         }
     }

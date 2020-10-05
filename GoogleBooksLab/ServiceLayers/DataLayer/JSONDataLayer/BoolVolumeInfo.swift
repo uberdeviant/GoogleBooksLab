@@ -18,7 +18,7 @@ struct BookVolumeInfo: Decodable {
     let description: String?
     
     let industryIdentifiers: [IndustryIdentifier]?
-    let pageCount: Int?
+    let pageCount: Int64?
     
     let printType: String
     let mainCategory: String?

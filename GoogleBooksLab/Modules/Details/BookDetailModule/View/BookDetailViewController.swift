@@ -92,19 +92,19 @@ extension BookDetailViewController: BookDetailViewable {
         }
     }
     
-    func updateLabels(by item: BookVolume?) {
+    func updateLabels(by item: BookObjectDescriptable?) {
         
-        bookTitleLabel.text = item?.volumeInfo.title ?? "Unknown"
-        bookAuthorLabel.text = item?.volumeInfo.authors?.joined(separator: "\n") ?? "Unknown"
+        bookTitleLabel.text = item?.bookDescription.title ?? "Unknown"
+        bookAuthorLabel.text = item?.bookDescription.authors?.joined(separator: "\n") ?? "Unknown"
         
-        categoryLabel.text = item?.volumeInfo.categories?.first ?? "Unknown"
-        publisherLabel.text = item?.volumeInfo.publisher ?? "Unknown"
-        if let pageCount = item?.volumeInfo.pageCount {
+        categoryLabel.text = item?.bookDescription.categories?.first ?? "Unknown"
+        publisherLabel.text = item?.bookDescription.publisher ?? "Unknown"
+        if let pageCount = item?.bookDescription.pageCount {
             pagesLabel.text = "\(pageCount)"
         } else {
             pagesLabel.text = "Unknown"
         }
-        if let rating = item?.volumeInfo.averageRating?.starredRaiting() {
+        if let rating = item?.bookDescription.rating?.starredRaiting() {
             ratingLabel.text = rating
             ratingLabel.textColor = .systemBlue
             ratingLabel.font = UIFont.systemFont(ofSize: 24)

@@ -22,7 +22,7 @@ protocol Routerable: RouterContainable {
     func instantiateShelfViewController()
     func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell?
     func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?, imageCache: ImageCachable) -> FavouriteTableViewCell?
-    func instantiateDetailViewController(by item: BookVolume?)
+    func instantiateDetailViewController(by item: BookObjectDescriptable?, needsToPush: Bool)
     func instantiateFavouriteBooks(imageCahe: ImageCachable)
     func popToRoot()
 }
@@ -71,11 +71,15 @@ class Router: Routerable {
         
     }
     
-    func instantiateDetailViewController(by item: BookVolume?) {
+    func instantiateDetailViewController(by item: BookObjectDescriptable?, needsToPush: Bool) {
         guard let navigationController = navigationController,
         let detailViewController = moduleAssembler?.createDetailModule(item: item, router: self) else {return}
         
-        navigationController.pushViewController(detailViewController, animated: true)
+        if needsToPush {
+            navigationController.pushViewController(detailViewController, animated: true)
+        } else {
+            navigationController.presentedViewController?.present(detailViewController, animated: true, completion: nil)
+        }
     }
     
     func instantiateFavouriteBooks(imageCahe: ImageCachable) {

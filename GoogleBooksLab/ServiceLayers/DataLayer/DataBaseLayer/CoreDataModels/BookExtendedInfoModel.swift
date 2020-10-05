@@ -19,7 +19,7 @@ class BookExtendedInfoModel: NSManagedObject {
         model.authors = bookVolumeInfo.authors
         
         if let pageCount = bookVolumeInfo.pageCount {
-            model.pageCount = Int64(pageCount)
+            model.pageCount = pageCount
         } else {
             model.pageCount = 0
         }

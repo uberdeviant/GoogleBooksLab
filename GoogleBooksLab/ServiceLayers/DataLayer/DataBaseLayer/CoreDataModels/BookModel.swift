@@ -8,8 +8,20 @@
 
 import CoreData
 
-class BookModel: NSManagedObject {
+class BookModel: NSManagedObject, BookObjectDescriptable {
 
+    var bookDescription: BookObjectDescription {
+        return (volumeID: volumeID,
+                title: bookExtendedInfoModel?.title,
+                authors: bookExtendedInfoModel?.authors,
+                categories: bookExtendedInfoModel?.categories,
+                publisher: bookExtendedInfoModel?.publisher,
+                pageCount: bookExtendedInfoModel?.pageCount,
+                rating: bookExtendedInfoModel?.averageRaiting,
+                smallThumbnail: bookExtendedInfoModel?.imageLinksModel?.smallThumbnail,
+                thumbnail: bookExtendedInfoModel?.imageLinksModel?.thumbnail)
+    }
+    
     class func createModel(from bookVolume: BookVolume, context: NSManagedObjectContext) -> BookModel {
         let model = BookModel(context: context)
         model.volumeID = bookVolume.id

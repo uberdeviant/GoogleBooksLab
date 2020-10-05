@@ -11,6 +11,7 @@ import CoreData
 
 protocol FavouriteBooksViewable: class {
     func dataLoaded()
+    func objectDeleted(at indexPath: IndexPath)
 }
 
 protocol FavouriteBooksPresentable {
@@ -22,6 +23,8 @@ protocol FavouriteBooksPresentable {
     func loadBooks()
     
     func rowSelected(at indexPath: IndexPath)
+    
+    func deleteBook(at indexPath: IndexPath) 
     
     func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell?
 }
@@ -54,15 +57,17 @@ class FavouriteBooksPresenter: FavouriteBooksPresentable {
         self.view?.dataLoaded()
     }
     
-    func deleteBook(volumeID: String) {
+    func deleteBook(at indexPath: IndexPath) {
+        guard let volumeID = favouriteBooks[indexPath.row].volumeID else {return}
         persistantContainer?.performBackgroundTask { [weak self] (context) in
             self?.dataBaseLayer.deleteBookModel(volumeId: volumeID, in: context)
-            self?.view?.dataLoaded()
+            self?.favouriteBooks.remove(at: indexPath.row)
+            self?.view?.objectDeleted(at: indexPath)
         }
     }
     
     func rowSelected(at indexPath: IndexPath) {
-        
+        router?.instantiateDetailViewController(by: favouriteBooks[indexPath.row], needsToPush: false)
     }
 
 }

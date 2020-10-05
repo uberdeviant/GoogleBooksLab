@@ -38,6 +38,12 @@ class FavouriteBooksTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter?.deleteBook(at: indexPath)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.rowSelected(at: indexPath)
     }
@@ -58,6 +64,12 @@ extension FavouriteBooksTableViewController {
 // MARK: - Presenter Dependency
 
 extension FavouriteBooksTableViewController: FavouriteBooksViewable {
+    func objectDeleted(at indexPath: IndexPath) {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     func dataLoaded() {
         tableView.reloadData()
     }

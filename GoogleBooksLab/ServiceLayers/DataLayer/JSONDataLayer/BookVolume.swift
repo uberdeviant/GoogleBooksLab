@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct BookVolume: Decodable {
+struct BookVolume: Decodable, BookObjectDescriptable {
+    
     let kind: String
     let id: String
     let etag: String
@@ -20,4 +21,16 @@ struct BookVolume: Decodable {
     
     let saleInfo: SaleInfo
     let accessInfo: AccessInfo
+    
+    var bookDescription: BookObjectDescription {
+        return (volumeID: id,
+                title: volumeInfo.title,
+                authors: volumeInfo.authors,
+                categories: volumeInfo.categories,
+                publisher: volumeInfo.publisher,
+                pageCount: volumeInfo.pageCount,
+                rating: volumeInfo.averageRating,
+                smallThumbnail: volumeInfo.imageLinks?.smallThumbnail,
+                thumbnail: volumeInfo.imageLinks?.thumbnail)
+    }
 }

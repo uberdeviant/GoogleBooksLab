@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController
-    func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController
+    func createDetailModule(item: BookObjectDescriptable?, router: Routerable) -> UIViewController
     func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController
 }
 
@@ -29,7 +29,7 @@ class ModuleAssembler: ModuleAssembling {
         return view
     }
     
-    func createDetailModule(item: BookVolume?, router: Routerable) -> UIViewController {
+    func createDetailModule(item: BookObjectDescriptable?, router: Routerable) -> UIViewController {
         let networkService = NetworkService() // Create network Service
         let view = BookDetailViewController() // Creste View
         let persistantContainer = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
