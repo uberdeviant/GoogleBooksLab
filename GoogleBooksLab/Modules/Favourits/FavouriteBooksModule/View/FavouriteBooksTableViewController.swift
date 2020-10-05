@@ -46,6 +46,7 @@ class FavouriteBooksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.rowSelected(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
