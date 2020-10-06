@@ -35,13 +35,18 @@ class BookCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Presenter Dependency
 
-extension BookCollectionViewCell: BookCellViewable {
-    
-    func updateCellBy(image: UIImage?, title: String) {
+extension BookCollectionViewCell: PolyBookCellViewable {
+    func updateViews(byImage image: UIImage?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            self.titleBookLabel.text = title
             self.bookThumbnailImageView.image = image
+        }
+    }
+    
+    func updateViews(byItem item: BookObjectDescriptable?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.titleBookLabel.text = item?.bookDescription.title
         }
     }
 }

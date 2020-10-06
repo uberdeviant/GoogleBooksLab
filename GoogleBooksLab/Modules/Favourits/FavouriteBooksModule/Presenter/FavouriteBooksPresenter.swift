@@ -14,7 +14,7 @@ protocol FavouriteBooksViewable: class {
     func objectDeleted(at indexPath: IndexPath)
 }
 
-protocol FavouriteBooksPresentable {
+protocol FavouriteBooksPresentable: class {
     
     var favouriteBooks: [BookModel] {get set}
     

@@ -60,15 +60,20 @@ class FavouriteTableViewCell: UITableViewCell {
 
 // MARK: - Presenter dependency
 
-extension FavouriteTableViewCell: FavouriteCellViewable {
-    func updateCellBy(image: UIImage?, extendedInfoModel: BookExtendedInfoModel?) {
+extension FavouriteTableViewCell: PolyBookCellViewable {
+    
+    func updateViews(byImage image: UIImage?) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else {return}
-            self.titleLabel.text = extendedInfoModel?.title ?? "Unknown"
-            self.authorsLabel.text = extendedInfoModel?.authors?.joined(separator: "\n") ?? "Unknown"
-            self.categoryLabel.text = extendedInfoModel?.categories?.first ?? "Unknown"
-            self.bookImageView.image = image
+            self?.bookImageView?.image = image
         }
     }
     
+    func updateViews(byItem item: BookObjectDescriptable?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.titleLabel.text = item?.bookDescription.title ?? "Unknown"
+            self.authorsLabel.text = item?.bookDescription.authors?.joined(separator: "\n") ?? "Unknown"
+            self.categoryLabel.text = item?.bookDescription.categories?.first ?? "Unknown"
+        }
+    }
 }
