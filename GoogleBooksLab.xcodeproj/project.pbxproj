@@ -334,10 +334,10 @@
 			children = (
 				D25BA23F252CDB260032C9DA /* PolyBookCell */,
 				D2CE30AC25160C50003FD77A /* BookCellModule */,
+				D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */,
 				D2CE30912515F67E003FD77A /* ShelfModule */,
 				D264BC3D25168985005EA18F /* BookDetailModule */,
 				D2BA2A362520AF1600372A66 /* FavouriteBooksModule */,
-				D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
