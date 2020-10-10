@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
 // This entities are created for cells that represent books, but they're not so different
 
 protocol PolyBookCellViewable: class {
-    func updateViews(byImage image: UIImage?) // Triggers when image loaded
+    func updateViews(byImage imageData: Data?) // Triggers when image loaded
     func updateViews(byItem item: BookObjectDescriptable?) // Triggers for book update
 }
 
@@ -40,8 +39,7 @@ class PolyBookCellPresenter: PolyBookCellPresentable {
         networkLayer?.loadThumbnail(of: stringLink, completion: { [weak self] (completion) in
             switch completion {
             case .success(let data):
-                let image = UIImage(data: data)
-                self?.view?.updateViews(byImage: image)
+                self?.view?.updateViews(byImage: data)
             case .failure(_):
                 self?.view?.updateViews(byImage: nil)
             }

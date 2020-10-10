@@ -61,9 +61,10 @@ class FavouriteTableViewCell: UITableViewCell {
 
 extension FavouriteTableViewCell: PolyBookCellViewable {
     
-    func updateViews(byImage image: UIImage?) {
+    func updateViews(byImage imageData: Data?) {
         DispatchQueue.main.async { [weak self] in
-            self?.bookImageView?.image = image
+            guard let data = imageData else {return}
+            self?.bookImageView?.image = UIImage(data: data)
         }
     }
     

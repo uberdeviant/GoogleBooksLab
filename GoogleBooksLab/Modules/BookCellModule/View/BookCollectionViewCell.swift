@@ -35,10 +35,10 @@ class BookCollectionViewCell: UICollectionViewCell {
 // MARK: - Presenter Dependency
 
 extension BookCollectionViewCell: PolyBookCellViewable {
-    func updateViews(byImage image: UIImage?) {
+    func updateViews(byImage imageData: Data?) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else {return}
-            self.bookThumbnailImageView.image = image
+            guard let self = self, let data = imageData else {return}
+            self.bookThumbnailImageView.image = UIImage(data: data)
         }
     }
     
