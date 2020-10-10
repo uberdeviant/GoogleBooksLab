@@ -25,7 +25,6 @@ class BookCollectionViewCell: UICollectionViewCell {
         
         bookThumbnailImageView.image = nil
         titleBookLabel.text = nil
-        presenter?.prepareForReuse()
     }
     
     required init?(coder: NSCoder) {

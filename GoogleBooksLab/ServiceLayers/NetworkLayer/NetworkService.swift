@@ -9,11 +9,22 @@
 import Foundation
 
 protocol NetworkServicing {
+    
+    init(cache: ImageDataCachable)
+    
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void)
-    func createLoadThumbnailTask(of stringURL: String, completion: @escaping(Result<Data, Error>) -> Void) -> URLSessionDataTask?
+    func loadThumbnail(of stringURL: String, completion: @escaping(Result<Data, Error>) -> Void)
+    
+    func clearCache()
 }
 
 class NetworkService: NetworkServicing {
+    
+    private var imageDataCachable: ImageDataCachable?
+    
+    required init(cache: ImageDataCachable) {
+        self.imageDataCachable = cache
+    }
     
     func searchBooks(by text: String, completion: @escaping (Result<BookSearchResult?, Error>) -> Void) {
         
@@ -40,23 +51,32 @@ class NetworkService: NetworkServicing {
         task.resume()
     }
     
-    func createLoadThumbnailTask(of stringURL: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask? {
+    func loadThumbnail(of stringURL: String, completion: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let url = URL(string: stringURL) else {
+        guard let url = NetworkAPIModel.getThumbnail(stringURL: stringURL).url else {
             completion(.failure(NetworkErrors.invalidURL))
-            return nil
+            return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+        if let imageData = imageDataCachable?[url] {
+            completion(.success(imageData as Data))
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in
             if let error = error {
                 completion(.failure(error))
             }
             
             if let data = data {
+                self?.imageDataCachable?[url] = data as NSData
                 completion(.success(data))
             }
         }
         
-        return task
+        task.resume()
+    }
+    
+    func clearCache() {
+        imageDataCachable?.removeAllImageData()
     }
 }

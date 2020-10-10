@@ -17,7 +17,7 @@ protocol ShelfPresentable: class {
     
     var booksSearchResults: BookSearchResult? {get set}
     
-    init(view: ShelfViewable, imageCache: ImageCachable, networkService: NetworkServicing, router: Routerable)
+    init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable)
     
     // MARK: - Network
     
@@ -41,7 +41,6 @@ class ShelfPresenter: ShelfPresentable {
     weak var view: ShelfViewable?
     var router: Routerable?
     let networkService: NetworkServicing!
-    let imageCacheForCells: ImageCachable!
     
     var booksSearchResults: BookSearchResult? {
         didSet {
@@ -49,15 +48,14 @@ class ShelfPresenter: ShelfPresentable {
         }
     }
     
-    required init(view: ShelfViewable, imageCache: ImageCachable, networkService: NetworkServicing, router: Routerable) {
+    required init(view: ShelfViewable, networkService: NetworkServicing, router: Routerable) {
         self.view = view
         self.networkService = networkService
-        self.imageCacheForCells = imageCache
         self.router = router
     }
     
     func clearCache() {
-        imageCacheForCells.removeAllImages()
+        networkService.clearCache()
     }
     
     func performSearch(by text: String) {
@@ -73,7 +71,7 @@ class ShelfPresenter: ShelfPresentable {
     
     func dequeueCell(collectionView: AnyObject, indexPath: IndexPath, cellId: String) -> BookCollectionViewCell? {
         guard let searchItem = booksSearchResults?.items?[indexPath.row] else {return nil}
-        return router?.dequeReusableBookCell(for: collectionView, indexPath: indexPath, cellId: cellId, item: searchItem, imageCache: imageCacheForCells)
+        return router?.dequeReusableBookCell(for: collectionView, indexPath: indexPath, cellId: cellId, item: searchItem)
     }
     
     func goToDetail(bookId: String?) {
@@ -85,6 +83,6 @@ class ShelfPresenter: ShelfPresentable {
     }
     
     func goToFavourites() {
-        router?.instantiateFavouriteBooks(imageCahe: imageCacheForCells)
+        router?.instantiateFavouriteBooks()
     }
 }

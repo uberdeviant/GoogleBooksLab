@@ -17,7 +17,7 @@ protocol FavouriteBooksPresentable: class {
     
     var favouriteBooks: [BookModel] {get set}
     
-    init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable)
+    init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, router: Routerable)
     
     func loadBooks()
     
@@ -31,21 +31,19 @@ protocol FavouriteBooksPresentable: class {
 class FavouriteBooksPresenter: FavouriteBooksPresentable {
     let dataBaseLayer: DataBasing
     var favouriteBooks: [BookModel] = []
-    var imageCache: ImageCachable
     var router: Routerable?
     
     weak var view: FavouriteBooksViewable?
     
-    required init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable) {
+    required init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, router: Routerable) {
         self.dataBaseLayer = dataBaseLayer
-        self.imageCache = imageCache
         self.view = view
         self.router = router
     }
     
     func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell? {
         let model = favouriteBooks[indexPath.row]
-        return router?.dequeReusableFavouriteCell(for: tableView, indexPath: indexPath, cellId: cellId, model: model, imageCache: imageCache)
+        return router?.dequeReusableFavouriteCell(for: tableView, indexPath: indexPath, cellId: cellId, model: model)
     }
     
     func loadBooks() {

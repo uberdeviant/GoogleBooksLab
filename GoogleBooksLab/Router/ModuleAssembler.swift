@@ -11,18 +11,18 @@ import UIKit
 protocol ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController
     func createDetailModule(item: BookObjectDescriptable?, router: Routerable) -> UIViewController
-    func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController
+    func createFavouritesModule(router: Routerable) -> UIViewController
 }
 
 class ModuleAssembler: ModuleAssembling {
     func createShelfModule(router: Routerable) -> UIViewController {
-        let networkService = NetworkService() // Create network Service
-        let imageCache = ImageCache() // Cache
+        let imageCache = ImageDataCache() // Cache
+        let networkService = NetworkService(cache: imageCache) // Create network Service
         let flowLayout = UICollectionViewFlowLayout() // Flow Layout
         flowLayout.scrollDirection = .vertical
         
         let view = ShelfCollectionViewController(collectionViewLayout: flowLayout) // Creste View
-        let presenter = ShelfPresenter(view: view, imageCache: imageCache, networkService: networkService, router: router) // Create Presenter with injected View
+        let presenter = ShelfPresenter(view: view, networkService: networkService, router: router) // Create Presenter with injected View
         
         view.presenter = presenter // Inverse dependency
         
@@ -30,7 +30,8 @@ class ModuleAssembler: ModuleAssembling {
     }
     
     func createDetailModule(item: BookObjectDescriptable?, router: Routerable) -> UIViewController {
-        let networkService = NetworkService() // Create network Service
+        let cache = ImageDataCache()
+        let networkService = NetworkService(cache: cache) // Create network Service
         let view = BookDetailViewController() // Creste View
         let dataBasing = DataBaseLayer()
         let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router, dataBasing: dataBasing) // Create Presenter with injected View
@@ -40,10 +41,10 @@ class ModuleAssembler: ModuleAssembling {
         return view
     }
     
-    func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController {
+    func createFavouritesModule(router: Routerable) -> UIViewController {
         let view = FavouriteBooksTableViewController()
         let dataBasing = DataBaseLayer()
-        let presenter = FavouriteBooksPresenter(view: view, dataBaseLayer: dataBasing, imageCache: imageCache, router: router)
+        let presenter = FavouriteBooksPresenter(view: view, dataBaseLayer: dataBasing, router: router)
         view.presenter = presenter
         
         return view

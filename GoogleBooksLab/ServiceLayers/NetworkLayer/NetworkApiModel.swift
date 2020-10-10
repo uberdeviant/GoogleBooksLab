@@ -14,13 +14,20 @@ enum NetworkAPIModel {
     
     case search(searchText: String, searchAmount: SearchAmount = (startIndex: 0, maxResults: 25))
     
+    case getThumbnail(stringURL: String)
+    
     var url: URL? {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = scheme
-        urlComponents.host = baseUrl
-        urlComponents.path = path
-        urlComponents.queryItems = queryParamters.map {URLQueryItem(name: $0.0, value: $0.1)}
-        return urlComponents.url
+        switch self {
+        case .getThumbnail(stringURL: let stringURL):
+            return URL(string: stringURL)
+        default:
+            var urlComponents = URLComponents()
+            urlComponents.scheme = scheme
+            urlComponents.host = baseUrl
+            urlComponents.path = path
+            urlComponents.queryItems = queryParamters.map {URLQueryItem(name: $0.0, value: $0.1)}
+            return urlComponents.url
+        }
     }
 }
 
@@ -39,6 +46,8 @@ extension NetworkAPIModel {
         switch self {
         case .search:
             return "/books/v1/volumes"
+        case .getThumbnail:
+            return ""
         }
     }
     private var queryParamters: [String: String] {
@@ -47,6 +56,8 @@ extension NetworkAPIModel {
             return ["q": text,
                     "startIndex": "\(searchAmount.startIndex)",
                     "maxResults": "\(searchAmount.maxResults)"]
+        case .getThumbnail:
+            return [:]
         }
     }
 }

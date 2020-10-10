@@ -13,9 +13,8 @@ protocol FavouriteCellPresentable {
     
     var bookID: String? {get set}
     
-    init(view: PolyBookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCachable, router: Routerable, bookModel: BookModel)
+    init(view: PolyBookCellViewable, networkLayer: NetworkServicing, router: Routerable, bookModel: BookModel)
     
-    func prepareForReuse()
 }
 
 class FavouriteCellPresenter: PolyBookCellPresenter, FavouriteCellPresentable {
@@ -23,18 +22,14 @@ class FavouriteCellPresenter: PolyBookCellPresenter, FavouriteCellPresentable {
     var router: Routerable
     var bookID: String?
     
-    required init(view: PolyBookCellViewable, networkLayer: NetworkServicing, imageCache: ImageCachable, router: Routerable, bookModel: BookModel) {
+    required init(view: PolyBookCellViewable, networkLayer: NetworkServicing, router: Routerable, bookModel: BookModel) {
         self.router = router
         self.bookID = bookModel.volumeID
         
-        super.init(view: view, imageCache: imageCache, networkLayer: networkLayer)
+        super.init(view: view, networkLayer: networkLayer)
         
         super.needsToUpdateView(by: bookModel.bookExtendedInfoModel?.imageLinksModel?.smallThumbnail)
         super.needsToUpdateView(by: bookModel)
-    }
-    
-    func prepareForReuse() {
-        super.cancelImageTask()// Task should be cancelled when reusing
     }
     
 }

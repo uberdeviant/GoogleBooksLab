@@ -54,7 +54,7 @@ class BookDetailPresenter: BookDetailPresentable {
     func loadImage() {
         guard let link = item?.bookDescription.thumbnail else { return }
         
-        let task = self.networkLayer?.createLoadThumbnailTask(of: link, completion: {[weak self] (result) in
+        networkLayer?.loadThumbnail(of: link, completion: { [weak self] (result) in
             guard let self = self else {return}
             switch result {
             case .success(let data):
@@ -63,8 +63,6 @@ class BookDetailPresenter: BookDetailPresentable {
                 self.view?.imageLoadFailure(error: error)
             }
         })
-        
-        task?.resume()
     }
     
     func updateLabels() {

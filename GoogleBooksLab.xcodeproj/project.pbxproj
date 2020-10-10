@@ -15,7 +15,7 @@
 		D24CDF70252B8DE600F1A8D3 /* BookObjectDescriptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CDF6F252B8DE600F1A8D3 /* BookObjectDescriptable.swift */; };
 		D25BA241252CDB690032C9DA /* PolyBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BA240252CDB690032C9DA /* PolyBookCell.swift */; };
 		D264BC3625166093005EA18F /* BookCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC3525166093005EA18F /* BookCellPresenter.swift */; };
-		D264BC3A251662E8005EA18F /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC39251662E8005EA18F /* ImageCache.swift */; };
+		D264BC3A251662E8005EA18F /* ImageDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC39251662E8005EA18F /* ImageDataCache.swift */; };
 		D264BC4325168B1D005EA18F /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4125168B1D005EA18F /* BookDetailViewController.swift */; };
 		D264BC4425168B1D005EA18F /* BookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D264BC4225168B1D005EA18F /* BookDetailViewController.xib */; };
 		D264BC4725169243005EA18F /* BookDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D264BC4625169243005EA18F /* BookDetailPresenter.swift */; };
@@ -72,7 +72,7 @@
 		D24CDF6F252B8DE600F1A8D3 /* BookObjectDescriptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookObjectDescriptable.swift; sourceTree = "<group>"; };
 		D25BA240252CDB690032C9DA /* PolyBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyBookCell.swift; sourceTree = "<group>"; };
 		D264BC3525166093005EA18F /* BookCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCellPresenter.swift; sourceTree = "<group>"; };
-		D264BC39251662E8005EA18F /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		D264BC39251662E8005EA18F /* ImageDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataCache.swift; sourceTree = "<group>"; };
 		D264BC4125168B1D005EA18F /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		D264BC4225168B1D005EA18F /* BookDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailViewController.xib; sourceTree = "<group>"; };
 		D264BC4625169243005EA18F /* BookDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailPresenter.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		D264BC38251662D1005EA18F /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				D264BC39251662E8005EA18F /* ImageCache.swift */,
+				D264BC39251662E8005EA18F /* ImageDataCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -219,32 +219,6 @@
 				D27702542528909A00C3CA72 /* BookExtendedInfoModel.swift */,
 			);
 			path = CoreDataModels;
-			sourceTree = "<group>";
-		};
-		D27C00282520B6FB00D0905C /* Favourits */ = {
-			isa = PBXGroup;
-			children = (
-				D2BA2A362520AF1600372A66 /* FavouriteBooksModule */,
-				D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */,
-			);
-			path = Favourits;
-			sourceTree = "<group>";
-		};
-		D27C00292520B71000D0905C /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				D264BC3D25168985005EA18F /* BookDetailModule */,
-			);
-			path = Details;
-			sourceTree = "<group>";
-		};
-		D27C002A2520B73800D0905C /* Shelf */ = {
-			isa = PBXGroup;
-			children = (
-				D2CE30AC25160C50003FD77A /* BookCellModule */,
-				D2CE30912515F67E003FD77A /* ShelfModule */,
-			);
-			path = Shelf;
 			sourceTree = "<group>";
 		};
 		D299161F252A2903007C0974 /* Presenter */ = {
@@ -359,9 +333,11 @@
 			isa = PBXGroup;
 			children = (
 				D25BA23F252CDB260032C9DA /* PolyBookCell */,
-				D27C002A2520B73800D0905C /* Shelf */,
-				D27C00292520B71000D0905C /* Details */,
-				D27C00282520B6FB00D0905C /* Favourits */,
+				D2CE30AC25160C50003FD77A /* BookCellModule */,
+				D2CE30912515F67E003FD77A /* ShelfModule */,
+				D264BC3D25168985005EA18F /* BookDetailModule */,
+				D2BA2A362520AF1600372A66 /* FavouriteBooksModule */,
+				D2BA2A3D2520AFB400372A66 /* FavouriteBookCellModule */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -600,7 +576,7 @@
 			files = (
 				D2CE30BA25162915003FD77A /* SaleInfo.swift in Sources */,
 				D2CE30B32516185D003FD77A /* UIViewExtension.swift in Sources */,
-				D264BC3A251662E8005EA18F /* ImageCache.swift in Sources */,
+				D264BC3A251662E8005EA18F /* ImageDataCache.swift in Sources */,
 				D289A5EA2516B4D400E9D9F3 /* ShelfCollectionViewController.swift in Sources */,
 				D2CE309B2515F7D8003FD77A /* ShelfPresenter.swift in Sources */,
 				D2CE30BC25162960003FD77A /* AccessInfo.swift in Sources */,

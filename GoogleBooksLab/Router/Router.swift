@@ -20,10 +20,10 @@ protocol RouterContainable {
 protocol Routerable: RouterContainable {
     
     func instantiateShelfViewController()
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell?
-    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?, imageCache: ImageCachable) -> FavouriteTableViewCell?
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?) -> BookCollectionViewCell?
+    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?) -> FavouriteTableViewCell?
     func instantiateDetailViewController(by item: BookObjectDescriptable?, needsToPush: Bool)
-    func instantiateFavouriteBooks(imageCahe: ImageCachable)
+    func instantiateFavouriteBooks()
     func popToRoot()
 }
 
@@ -45,26 +45,26 @@ class Router: Routerable {
         
     }
     
-    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?, imageCache: ImageCachable) -> BookCollectionViewCell? {
+    func dequeReusableBookCell(for collectionView: AnyObject, indexPath: IndexPath, cellId: String, item: BookVolume?) -> BookCollectionViewCell? {
         //We need to use AnyObject because we don't want to import UIKit for presenter
         guard let collectionView = collectionView as? UICollectionView, let item = item else {return nil}
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? BookCollectionViewCell else {return nil}
-        let networkService = NetworkService()
-        let presenter = BookCellPresenter(view: cell, networkLayer: networkService, imageCache: imageCache, router: self, bookItem: item)
+        let networkService = NetworkService(cache: ImageDataCache())
+        let presenter = BookCellPresenter(view: cell, networkLayer: networkService, router: self, bookItem: item)
         cell.presenter = presenter
         
         return cell
         
     }
     
-    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?, imageCache: ImageCachable) -> FavouriteTableViewCell? {
+    func dequeReusableFavouriteCell(for tableView: AnyObject, indexPath: IndexPath, cellId: String, model: BookModel?) -> FavouriteTableViewCell? {
         //We need to use AnyObject because we don't want to import UIKit for presenter
         guard let tableView = tableView as? UITableView, let model = model else {return nil}
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? FavouriteTableViewCell else {return nil}
-        let networkService = NetworkService()
-        let presenter = FavouriteCellPresenter(view: cell, networkLayer: networkService, imageCache: imageCache, router: self, bookModel: model)
+        let networkService = NetworkService(cache: ImageDataCache())
+        let presenter = FavouriteCellPresenter(view: cell, networkLayer: networkService, router: self, bookModel: model)
         cell.presenter = presenter
         
         return cell
@@ -82,9 +82,9 @@ class Router: Routerable {
         }
     }
     
-    func instantiateFavouriteBooks(imageCahe: ImageCachable) {
+    func instantiateFavouriteBooks() {
         guard let navigationController = navigationController,
-              let favouritesTableViewController = moduleAssembler?.createFavouritesModule(imageCache: imageCahe, router: self) else {return}
+              let favouritesTableViewController = moduleAssembler?.createFavouritesModule(router: self) else {return}
         navigationController.present(favouritesTableViewController, animated: true, completion: nil)
     }
     

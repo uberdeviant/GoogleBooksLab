@@ -42,7 +42,6 @@ class FavouriteTableViewCell: UITableViewCell {
         authorsLabel.text = nil
         categoryLabel.text = nil
         
-        presenter?.prepareForReuse()
     }
     
     override func awakeFromNib() {
