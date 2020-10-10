@@ -32,9 +32,8 @@ class ModuleAssembler: ModuleAssembling {
     func createDetailModule(item: BookObjectDescriptable?, router: Routerable) -> UIViewController {
         let networkService = NetworkService() // Create network Service
         let view = BookDetailViewController() // Creste View
-        let persistantContainer = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
         let dataBasing = DataBaseLayer()
-        let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router, persistentContainer: persistantContainer, dataBasing: dataBasing) // Create Presenter with injected View
+        let presenter = BookDetailPresenter(view: view, item: item, networkLayer: networkService, router: router, dataBasing: dataBasing) // Create Presenter with injected View
         
         view.presenter = presenter // Inverse dependency
         
@@ -43,9 +42,8 @@ class ModuleAssembler: ModuleAssembling {
     
     func createFavouritesModule(imageCache: ImageCachable, router: Routerable) -> UIViewController {
         let view = FavouriteBooksTableViewController()
-        let persistantContainer = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
         let dataBasing = DataBaseLayer()
-        let presenter = FavouriteBooksPresenter(view: view, persistantContainer: persistantContainer, dataBaseLayer: dataBasing, imageCache: imageCache, router: router)
+        let presenter = FavouriteBooksPresenter(view: view, dataBaseLayer: dataBasing, imageCache: imageCache, router: router)
         view.presenter = presenter
         
         return view

@@ -77,9 +77,7 @@ extension BookDetailViewController {
 
 extension BookDetailViewController: BookDetailViewable {
     func favouritsUpdated(value: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationLikeButton.setTitleColor(value ? .systemRed : .label, for: .normal)
-        }
+        navigationLikeButton.setTitleColor(value ? .systemRed : .label, for: .normal)
     }
     
     func imageLoadFailure(error: Error) {
@@ -87,7 +85,7 @@ extension BookDetailViewController: BookDetailViewable {
     }
     
     func imageLoaded(imageData: Data) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.async {[weak self] in
             self?.bookTitleImageView.image = UIImage(data: imageData)
         }
     }

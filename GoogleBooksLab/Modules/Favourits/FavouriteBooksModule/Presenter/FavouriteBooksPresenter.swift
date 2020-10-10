@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 protocol FavouriteBooksViewable: class {
     func dataLoaded()
@@ -18,7 +17,7 @@ protocol FavouriteBooksPresentable: class {
     
     var favouriteBooks: [BookModel] {get set}
     
-    init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer?, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable)
+    init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable)
     
     func loadBooks()
     
@@ -30,7 +29,6 @@ protocol FavouriteBooksPresentable: class {
 }
 
 class FavouriteBooksPresenter: FavouriteBooksPresentable {
-    var persistantContainer: NSPersistentContainer?
     let dataBaseLayer: DataBasing
     var favouriteBooks: [BookModel] = []
     var imageCache: ImageCachable
@@ -38,8 +36,7 @@ class FavouriteBooksPresenter: FavouriteBooksPresentable {
     
     weak var view: FavouriteBooksViewable?
     
-    required init(view: FavouriteBooksViewable, persistantContainer: NSPersistentContainer?, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable) {
-        self.persistantContainer = persistantContainer
+    required init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, imageCache: ImageCachable, router: Routerable) {
         self.dataBaseLayer = dataBaseLayer
         self.imageCache = imageCache
         self.view = view
@@ -52,18 +49,15 @@ class FavouriteBooksPresenter: FavouriteBooksPresentable {
     }
     
     func loadBooks() {
-        guard let context = persistantContainer?.viewContext else {return}
-        favouriteBooks = dataBaseLayer.loadAllDataObjects(in: context)
+        favouriteBooks = dataBaseLayer.loadAllDataObjects()
         self.view?.dataLoaded()
     }
     
     func deleteBook(at indexPath: IndexPath) {
         guard let volumeID = favouriteBooks[indexPath.row].volumeID else {return}
-        persistantContainer?.performBackgroundTask { [weak self] (context) in
-            self?.dataBaseLayer.deleteBookModel(volumeId: volumeID, in: context)
-            self?.favouriteBooks.remove(at: indexPath.row)
-            self?.view?.objectDeleted(at: indexPath)
-        }
+        dataBaseLayer.deleteBookModel(volumeId: volumeID)
+        favouriteBooks.remove(at: indexPath.row)
+        view?.objectDeleted(at: indexPath)
     }
     
     func rowSelected(at indexPath: IndexPath) {

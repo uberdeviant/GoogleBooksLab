@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 protocol BookDetailViewable: class {
     func imageLoaded(imageData: Data)
@@ -21,7 +20,7 @@ protocol BookDetailViewable: class {
 
 protocol BookDetailPresentable: class {
     
-    init(view: BookDetailViewable, item: BookObjectDescriptable?, networkLayer: NetworkServicing, router: Routerable, persistentContainer: NSPersistentContainer?, dataBasing: DataBasing)
+    init(view: BookDetailViewable, item: BookObjectDescriptable?, networkLayer: NetworkServicing, router: Routerable, dataBasing: DataBasing)
     
     func loadImage()
     
@@ -38,19 +37,17 @@ protocol BookDetailPresentable: class {
 class BookDetailPresenter: BookDetailPresentable {
     weak var view: BookDetailViewable?
     
-    var persistentContainer: NSPersistentContainer?
     let dataBasing: DataBasing?
     let networkLayer: NetworkServicing?
     let router: Routerable?
     var item: BookObjectDescriptable?
     var isFavourite: Bool = false
     
-    required init(view: BookDetailViewable, item: BookObjectDescriptable?, networkLayer: NetworkServicing, router: Routerable, persistentContainer: NSPersistentContainer?, dataBasing: DataBasing) {
+    required init(view: BookDetailViewable, item: BookObjectDescriptable?, networkLayer: NetworkServicing, router: Routerable, dataBasing: DataBasing) {
         self.view = view
         self.networkLayer = networkLayer
         self.router = router
         self.item = item
-        self.persistentContainer = persistentContainer
         self.dataBasing = dataBasing
     }
     
@@ -76,31 +73,24 @@ class BookDetailPresenter: BookDetailPresentable {
     
     func loadFavourite() {
         guard let itemID = item?.bookDescription.volumeID else { return }
-        persistentContainer?.performBackgroundTask({ [weak self] (context) in
-            guard let self = self else {return}
-            if self.dataBasing?.findBook(matching: itemID, in: context) != nil {
-                self.isFavourite = true
-            } else {
-                self.isFavourite = false
-            }
-            self.view?.favouritsUpdated(value: self.isFavourite)
-        })
+        if self.dataBasing?.findBook(matching: itemID) != nil {
+            self.isFavourite = true
+        } else {
+            self.isFavourite = false
+        }
+        self.view?.favouritsUpdated(value: self.isFavourite)
     }
     
     func heartTapped() {
         guard let itemID = item?.bookDescription.volumeID else { return }
-        persistentContainer?.performBackgroundTask({ [weak self] (context) in
-            
-            guard let self = self else {return}
-            self.isFavourite = !self.isFavourite
-            if self.isFavourite {
-                guard let itemJSON = self.item as? BookVolume else {print("Manged Object is already deleted and couldn't be written again"); return}
-                self.dataBasing?.writeBookModel(from: itemJSON, in: context)
-            } else {
-                self.dataBasing?.deleteBookModel(volumeId: itemID, in: context)
-            }
-            self.view?.favouritsUpdated(value: self.isFavourite)
-        })
+        self.isFavourite = !self.isFavourite
+        if self.isFavourite {
+            guard let itemJSON = self.item as? BookVolume else {print("Manged Object is already deleted and couldn't be written again"); return}
+            self.dataBasing?.writeBookModel(from: itemJSON)
+        } else {
+            self.dataBasing?.deleteBookModel(volumeId: itemID)
+        }
+        self.view?.favouritsUpdated(value: self.isFavourite)
         
     }
     
