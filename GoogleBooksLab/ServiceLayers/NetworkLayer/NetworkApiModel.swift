@@ -21,18 +21,27 @@ enum NetworkAPIModel {
         case .getThumbnail(stringURL: let stringURL):
             return URL(string: stringURL)
         default:
-            var urlComponents = URLComponents()
-            urlComponents.scheme = scheme
-            urlComponents.host = baseUrl
-            urlComponents.path = path
-            urlComponents.queryItems = queryParamters.map {URLQueryItem(name: $0.0, value: $0.1)}
-            return urlComponents.url
+            return urlComponents?.url
         }
     }
 }
 
 // MARK: - Private computed properties
 extension NetworkAPIModel {
+    
+    private var urlComponents: URLComponents? {
+        switch self {
+        case .getThumbnail:
+            return nil
+        default:
+            var urlComponents = URLComponents()
+            urlComponents.scheme = scheme
+            urlComponents.host = baseUrl
+            urlComponents.path = path
+            urlComponents.queryItems = queryParamters.map {URLQueryItem(name: $0.0, value: $0.1)}
+            return urlComponents
+        }
+    }
     
     private var scheme: String {
         return "https"
