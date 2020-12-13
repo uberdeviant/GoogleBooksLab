@@ -9,7 +9,13 @@
 import CoreData
 
 protocol DataBasing {
+    var objectSaved: ((NSManagedObjectID?) -> Void)? {get set}
+    
+    var objectFound: ((Bool) -> Void)? {get set}
+    
     func findBook(matching bookVolumeID: String) -> BookModel?
+    
+    func findBy(objectID: NSManagedObjectID)
     
     func writeBookModel(from bookVolume: BookVolume)
     
@@ -34,6 +40,9 @@ class DataBaseLayer: DataBasing {
         return persistentContainer.viewContext
     }
     
+    var objectSaved: ((NSManagedObjectID?) -> Void)?
+    var objectFound: ((Bool) -> Void)?
+    
     func findBook(matching bookVolumeID: String) -> BookModel? {
         let request: NSFetchRequest<BookModel> = BookModel.fetchRequest()
         request.predicate = NSPredicate(format: "volumeID = %@", bookVolumeID)
@@ -47,19 +56,39 @@ class DataBaseLayer: DataBasing {
     }
     
     func writeBookModel(from bookVolume: BookVolume) {
-        if let book = findBook(matching: bookVolume.id) {
-            viewContext.delete(book)
+        persistentContainer.performBackgroundTask { [weak self] (context) in
+            guard let self = self else {return}
+            if let book = self.findBook(matching: bookVolume.id) {
+                context.delete(book)
+            }
+            
+            let book = BookModel.createModel(from: bookVolume, context: context)
+            let extendedBook = BookExtendedInfoModel.createModel(from: bookVolume.volumeInfo, context: context)
+            let imageLinks = ImageLinksModel.createModel(from: bookVolume.volumeInfo.imageLinks, context: context)
+            
+            //Relations
+            extendedBook.imageLinksModel = imageLinks
+            book.bookExtendedInfoModel = extendedBook
+            
+            do {
+                try context.save()
+                print("Saving - Current Thread:", Thread.current)
+                self.objectSaved?(book.objectID)
+            } catch {
+                self.objectSaved?(nil)
+            }
         }
-        
-        let book = BookModel.createModel(from: bookVolume, context: viewContext)
-        let extendedBook = BookExtendedInfoModel.createModel(from: bookVolume.volumeInfo, context: viewContext)
-        let imageLinks = ImageLinksModel.createModel(from: bookVolume.volumeInfo.imageLinks, context: viewContext)
-        
-        //Relations
-        extendedBook.imageLinksModel = imageLinks
-        book.bookExtendedInfoModel = extendedBook
-        
-        try? viewContext.save()
+    }
+    
+    func findBy(objectID: NSManagedObjectID) {
+        do {
+            let object = try viewContext.existingObject(with: objectID) // return a fault
+            print("Loading - Current Thread:", Thread.current)
+            print("Passed ID and object ID are equal: \(objectID == object.objectID)")
+            objectFound?(true)
+        } catch {
+            objectFound?(false)
+        }
     }
     
     func deleteBookModel(volumeId: String) {
