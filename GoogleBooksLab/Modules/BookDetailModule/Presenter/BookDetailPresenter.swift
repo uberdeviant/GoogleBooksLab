@@ -67,9 +67,9 @@ class BookDetailPresenter: BookDetailPresentable {
     
     func bindDataSaving() {
         // Then we listen to objectSaved closure, return NSManagedObjectID of saved object and try to find in the Main thread
-        dataBasing?.objectSaved = {[weak self] (objectID) in
-            guard let id = objectID else {return}
-            DispatchQueue.main.async {
+        dataBasing?.objectSaved = {(objectID) in
+            DispatchQueue.main.async { [weak self] in
+                guard let id = objectID else {return}
                 self?.dataBasing?.findBy(objectID: id)
             }
         }
