@@ -59,6 +59,7 @@ extension NetworkAPIModel {
             return ""
         }
     }
+    
     private var queryParamters: [String: String] {
         switch self {
         case .search(let text, let searchAmount):
