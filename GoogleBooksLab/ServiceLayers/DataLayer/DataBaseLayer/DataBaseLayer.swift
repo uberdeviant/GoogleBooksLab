@@ -12,7 +12,7 @@ protocol DataBasing {
     var objectSaved: ((NSManagedObjectID?) -> Void)? {get set}
     var objectFound: ((Bool) -> Void)? {get set}
 
-    func findBook(matching bookVolumeID: String) -> BookModel?
+    func findBook(matching bookVolumeID: String, in context: NSManagedObjectContext) -> BookModel?
     func findBy(objectID: NSManagedObjectID)
     func writeBookModel(from bookVolume: BookVolume)
     func deleteBookModel(volumeId: String)
@@ -38,11 +38,11 @@ class DataBaseLayer: DataBasing {
     var objectSaved: ((NSManagedObjectID?) -> Void)?
     var objectFound: ((Bool) -> Void)?
     
-    func findBook(matching bookVolumeID: String) -> BookModel? {
+    func findBook(matching bookVolumeID: String, in context: NSManagedObjectContext) -> BookModel? {
         let request: NSFetchRequest<BookModel> = BookModel.fetchRequest()
         request.predicate = NSPredicate(format: "volumeID = %@", bookVolumeID)
         
-        let matches = try? viewContext.fetch(request)
+        let matches = try? context.fetch(request)
         if let unwMatches = matches, !unwMatches.isEmpty {
             return unwMatches[0]
         } else {
@@ -53,7 +53,7 @@ class DataBaseLayer: DataBasing {
     func writeBookModel(from bookVolume: BookVolume) {
         persistentContainer.performBackgroundTask { [weak self] (context) in
             guard let self = self else {return}
-            if let book = self.findBook(matching: bookVolume.id) {
+            if let book = self.findBook(matching: bookVolume.id, in: context) {
                 context.delete(book)
             }
             
@@ -87,7 +87,7 @@ class DataBaseLayer: DataBasing {
     }
     
     func deleteBookModel(volumeId: String) {
-        if let book = findBook(matching: volumeId) {
+        if let book = findBook(matching: volumeId, in: viewContext) {
             viewContext.delete(book)
             try? viewContext.save()
         }
