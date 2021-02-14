@@ -12,7 +12,7 @@ protocol DataBasing {
     var objectSaved: ((NSManagedObjectID?) -> Void)? {get set}
     var objectFound: ((Bool) -> Void)? {get set}
 
-    func findBook(matching bookVolumeID: String, in context: NSManagedObjectContext) -> BookModel?
+    func findBook(matching bookVolumeID: String, in backgroundContext: NSManagedObjectContext?) -> BookModel?
     func findBy(objectID: NSManagedObjectID)
     func writeBookModel(from bookVolume: BookVolume)
     func deleteBookModel(volumeId: String)
@@ -38,11 +38,11 @@ class DataBaseLayer: DataBasing {
     var objectSaved: ((NSManagedObjectID?) -> Void)?
     var objectFound: ((Bool) -> Void)?
     
-    func findBook(matching bookVolumeID: String, in context: NSManagedObjectContext) -> BookModel? {
+    func findBook(matching bookVolumeID: String, in backgroundContext: NSManagedObjectContext?) -> BookModel? {
         let request: NSFetchRequest<BookModel> = BookModel.fetchRequest()
         request.predicate = NSPredicate(format: "volumeID = %@", bookVolumeID)
         
-        let matches = try? context.fetch(request)
+        let matches = try? (backgroundContext ?? viewContext).fetch(request)
         if let unwMatches = matches, !unwMatches.isEmpty {
             return unwMatches[0]
         } else {

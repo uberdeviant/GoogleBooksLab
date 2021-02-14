@@ -99,7 +99,7 @@ class BookDetailPresenter: BookDetailPresentable {
     
     func loadFavourite() {
         guard let itemID = item?.bookDescription.volumeID else { return }
-        if self.dataBasing?.findBook(matching: itemID) != nil {
+        if self.dataBasing?.findBook(matching: itemID, in: nil) != nil {
             self.isFavourite = true
         } else {
             self.isFavourite = false
