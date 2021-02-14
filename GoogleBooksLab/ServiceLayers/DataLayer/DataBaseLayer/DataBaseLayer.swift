@@ -10,17 +10,12 @@ import CoreData
 
 protocol DataBasing {
     var objectSaved: ((NSManagedObjectID?) -> Void)? {get set}
-    
     var objectFound: ((Bool) -> Void)? {get set}
-    
+
     func findBook(matching bookVolumeID: String) -> BookModel?
-    
     func findBy(objectID: NSManagedObjectID)
-    
     func writeBookModel(from bookVolume: BookVolume)
-    
     func deleteBookModel(volumeId: String)
-    
     func loadAllDataObjects() -> [BookModel]
 }
 

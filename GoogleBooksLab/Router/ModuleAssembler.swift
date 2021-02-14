@@ -43,7 +43,7 @@ class ModuleAssembler: ModuleAssembling {
     
     func createFavouritesModule(router: Routerable) -> UIViewController {
         let view = FavouriteBooksTableViewController()
-        let dataBasing = DataBaseLayer()
+        let dataBasing = FetchedDataBase()
         let presenter = FavouriteBooksPresenter(view: view, dataBaseLayer: dataBasing, router: router)
         view.presenter = presenter
         

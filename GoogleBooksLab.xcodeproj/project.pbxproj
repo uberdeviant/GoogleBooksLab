@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D22DF2BC25D95E03000AF095 /* FetchedDataBaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DF2BB25D95E03000AF095 /* FetchedDataBaseLayer.swift */; };
 		D2366CCF25176B3100F4E6D6 /* MockModuleAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366CCE25176B3100F4E6D6 /* MockModuleAssembler.swift */; };
 		D2366CD6251770BF00F4E6D6 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366CD5251770BF00F4E6D6 /* RouterTests.swift */; };
 		D2366CD825177AC200F4E6D6 /* ShelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366CD725177AC200F4E6D6 /* ShelfTests.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D22DF2BB25D95E03000AF095 /* FetchedDataBaseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedDataBaseLayer.swift; sourceTree = "<group>"; };
 		D2366CCE25176B3100F4E6D6 /* MockModuleAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModuleAssembler.swift; sourceTree = "<group>"; };
 		D2366CD5251770BF00F4E6D6 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		D2366CD725177AC200F4E6D6 /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				D277024B2528900E00C3CA72 /* CoreDataModels */,
 				D2CE30742515F634003FD77A /* GoogleBooksLab.xcdatamodeld */,
 				D27702472528885100C3CA72 /* DataBaseLayer.swift */,
+				D22DF2BB25D95E03000AF095 /* FetchedDataBaseLayer.swift */,
 			);
 			path = DataBaseLayer;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				D2BA2A3325209CC300372A66 /* NetworkErrors.swift in Sources */,
 				D2CE30BE25163168003FD77A /* BookSearchResult.swift in Sources */,
 				D2CE306E2515F634003FD77A /* SceneDelegate.swift in Sources */,
+				D22DF2BC25D95E03000AF095 /* FetchedDataBaseLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

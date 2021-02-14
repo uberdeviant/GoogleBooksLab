@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData.NSFetchedResultsController
 
 protocol FavouriteBooksViewable: class {
     func dataLoaded()
@@ -15,9 +16,11 @@ protocol FavouriteBooksViewable: class {
 
 protocol FavouriteBooksPresentable: class {
     
-    var favouriteBooks: [BookModel] {get set}
+    var resultInfo: [NSFetchedResultsSectionInfo]? { get }
     
-    init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, router: Routerable)
+    init(view: FavouriteBooksViewable, dataBaseLayer: FetchedDataBasing, router: Routerable)
+    
+    func setDelegate()
     
     func loadBooks()
     
@@ -28,38 +31,52 @@ protocol FavouriteBooksPresentable: class {
     func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell?
 }
 
-class FavouriteBooksPresenter: FavouriteBooksPresentable {
-    let dataBaseLayer: DataBasing
-    var favouriteBooks: [BookModel] = []
+class FavouriteBooksPresenter: NSObject, FavouriteBooksPresentable {
+    let dataBaseLayer: FetchedDataBasing
+    var resultInfo: [NSFetchedResultsSectionInfo]? { dataBaseLayer.resultInfo }
     var router: Routerable?
     
     weak var view: FavouriteBooksViewable?
     
-    required init(view: FavouriteBooksViewable, dataBaseLayer: DataBasing, router: Routerable) {
+    required init(view: FavouriteBooksViewable, dataBaseLayer: FetchedDataBasing, router: Routerable) {
         self.dataBaseLayer = dataBaseLayer
         self.view = view
         self.router = router
     }
     
+    func setDelegate() {
+        self.dataBaseLayer.setDelegate(delegate: self)
+    }
+    
     func dequeueCell(tableView: AnyObject, indexPath: IndexPath, cellId: String) -> FavouriteTableViewCell? {
-        let model = favouriteBooks[indexPath.row]
+        let model = dataBaseLayer.getObject(at: indexPath)
         return router?.dequeReusableFavouriteCell(for: tableView, indexPath: indexPath, cellId: cellId, model: model)
     }
     
     func loadBooks() {
-        favouriteBooks = dataBaseLayer.loadAllDataObjects()
-        self.view?.dataLoaded()
+        dataBaseLayer.performFetch()
     }
     
     func deleteBook(at indexPath: IndexPath) {
-        guard let volumeID = favouriteBooks[indexPath.row].volumeID else {return}
+        guard let volumeID = dataBaseLayer.getObject(at: indexPath).volumeID else {return}
         dataBaseLayer.deleteBookModel(volumeId: volumeID)
-        favouriteBooks.remove(at: indexPath.row)
-        view?.objectDeleted(at: indexPath)
     }
     
     func rowSelected(at indexPath: IndexPath) {
-        router?.instantiateDetailViewController(by: favouriteBooks[indexPath.row], needsToPush: false)
+        router?.instantiateDetailViewController(by: dataBaseLayer.getObject(at: indexPath), needsToPush: false)
     }
 
+}
+
+extension FavouriteBooksPresenter: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        guard let indexPath = indexPath else { return }
+        switch type {
+        case .delete:
+            view?.objectDeleted(at: indexPath)
+        default:
+            break
+        }
+    }
 }

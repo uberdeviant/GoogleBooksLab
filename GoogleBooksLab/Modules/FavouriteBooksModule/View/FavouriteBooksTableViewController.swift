@@ -22,12 +22,17 @@ class FavouriteBooksTableViewController: UITableViewController {
         super.viewDidLoad()
         updateTableView()
         presenter?.loadBooks()
+        presenter?.setDelegate()
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter?.resultInfo?.count ?? 0
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.favouriteBooks.count ?? 0
+        return presenter?.resultInfo?[section].numberOfObjects ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,9 +71,7 @@ extension FavouriteBooksTableViewController {
 
 extension FavouriteBooksTableViewController: FavouriteBooksViewable {
     func objectDeleted(at indexPath: IndexPath) {
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func dataLoaded() {
