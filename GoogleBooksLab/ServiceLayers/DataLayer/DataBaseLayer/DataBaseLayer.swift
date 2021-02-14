@@ -87,7 +87,7 @@ class DataBaseLayer: DataBasing {
     }
     
     func deleteBookModel(volumeId: String) {
-        if let book = findBook(matching: volumeId, in: viewContext) {
+        if let book = findBook(matching: volumeId, in: nil) {
             viewContext.delete(book)
             try? viewContext.save()
         }
